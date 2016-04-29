@@ -3,15 +3,13 @@
 <p>Cost: {{cart.ticket_type.cost}} UAH.</p>
 
 <p>
-    <hr>
-    <font color="red">LiqPay widget here</font>
-    <hr>
-</p>
-
-<p>
     Status:
+    Payment is not completed
     {%if cart.status == 'CREATED'%}
-        Payment is not completed.
+        <p>
+            {{liqpay_form|safe}}
+        </p>
+
     {%endif%}
     {%if cart.status == 'TICKET_ISSUED'%}
         Payment confirmed! <a href="{{ cart.ticket.get_absolute_url }}" rel="nofollow">View ticket</a>

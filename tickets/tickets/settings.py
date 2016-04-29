@@ -123,7 +123,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+LIQPAY_PUBLIC = os.environ.get('LIQPAY_PUBLIC')
+LIQPAY_PRIVATE = os.environ.get('LIQPAY_PRIVATE')
+
 if os.environ.get('TICKETS_MODE') == 'PRODUCTION':
     from .production_settings import *
 else:
     from .local_settings import *
+
+if not (LIQPAY_PRIVATE and LIQPAY_PUBLIC):
+    raise RuntimeError('No liqpay settings provided')

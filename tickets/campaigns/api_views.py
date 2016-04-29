@@ -9,3 +9,13 @@ class HelloWorld(Endpoint):
     def post(self, request):
         name = request.params.get('name', 'World')
         return {'message': 'POST Hello, %s!' % name}
+
+
+class LiqPayS2S(Endpoint):
+    def get(self, request):
+        name = request.params.get('name', 'World')
+        return {'message': 'Hello, %s!' % name}
+
+    def post(self, request):
+        name = request.params.get('name', 'World')
+        return {'message': 'POST Hello, %s!' % name}

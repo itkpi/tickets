@@ -21,7 +21,7 @@ class TicketType(models.Model):
     campaign = models.ForeignKey(Campaign)
 
     def __str__(self):
-        return '"{}" ticket of campaign <{}>'.format(self.type, self.campaign)
+        return '"{}" ticket of <{}>'.format(self.type, self.campaign)
 
 
 class IssuedTicket(models.Model):

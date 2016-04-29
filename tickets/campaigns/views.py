@@ -2,9 +2,12 @@ import logging
 from uuid import uuid4
 
 from campaigns.models import Campaign, TicketType, Cart, IssuedTicket
+from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.views.generic import ListView, DetailView, View
+from liqpay.liqpay import LiqPay
+from tickets.settings import LIQPAY_PUBLIC, LIQPAY_PRIVATE
 
 logger = logging.getLogger(__name__)
 
@@ -42,6 +45,27 @@ class CartDetailView(DetailView):
 
     def get_slug_field(self):
         return 'uid'
+
+    def get_context_data(self, **kwargs):
+        cart = self.get_object()
+        context = super().get_context_data(**kwargs)
+
+        liqpay = LiqPay(LIQPAY_PUBLIC, LIQPAY_PRIVATE)
+        html = liqpay.cnb_form({
+            "action": "pay",
+            "amount": str(cart.ticket_type.cost),
+            "currency": "UAH",
+            "description": "{} ticket for {}".format(cart.ticket_type.type, cart.ticket_type.campaign.title),
+            "order_id": cart.uid,
+            "language": "ru",
+            "sandbox": cart.ticket_type.campaign.sandbox,
+            "server_url": reverse('api-liqpay', args=(cart.uid,)),
+            "result_url": cart.get_absolute_url()
+        })
+
+        context['liqpay_form'] = html
+
+        return context
 
 
 class TicketDetailView(DetailView):
