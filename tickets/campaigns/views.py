@@ -5,6 +5,7 @@ from django.views.generic import ListView, DetailView
 
 class CampaignListView(ListView):
     model = Campaign
+    queryset = Campaign.objects.filter(opened=True)
 
 
 class CampaignDetailView(DetailView):

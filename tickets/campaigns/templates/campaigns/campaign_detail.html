@@ -1,4 +1,4 @@
-<h1>{{campaign.title}}</h1>
+<h1>{{campaign.title}} {%if campaign.sandbox%}<font color="red">[SANDBOX]</font>{%endif%}</h1>
 <h2>Tickets:</h2>
 <ul>
     {% for tickettype in campaign.tickettype_set.all %}

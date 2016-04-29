@@ -1,0 +1,32 @@
+[
+{
+  "model": "campaigns.campaign",
+  "pk": 1,
+  "fields": {
+    "title": "Test",
+    "slug": "test",
+    "opened": true,
+    "sandbox": true
+  }
+},
+{
+  "model": "campaigns.tickettype",
+  "pk": 1,
+  "fields": {
+    "type": "Early Bird",
+    "cost": "100.00",
+    "amount": 5,
+    "campaign": 1
+  }
+},
+{
+  "model": "campaigns.tickettype",
+  "pk": 2,
+  "fields": {
+    "type": "Regular",
+    "cost": "150.00",
+    "amount": 20,
+    "campaign": 1
+  }
+}
+]
