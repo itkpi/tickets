@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+from campaigns.api_views import HelloWorld
 from campaigns.views import CampaignListView, CampaignDetailView, TicketTypeListView, BuyTicketView, CartDetailView, \
     TicketDetailView
 from django.conf.urls import url
@@ -30,4 +31,6 @@ urlpatterns = [
         name='buy-ticket'),
     url(r'^cart/(?P<slug>[-\w]+)/$', CartDetailView.as_view(), name='cart-details'),
     url(r'^ticket/(?P<slug>[-\w]+)/$', TicketDetailView.as_view(), name='ticket-details'),
+
+    url(r'^api/hello/$', HelloWorld.as_view())
 ]
