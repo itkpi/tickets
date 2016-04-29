@@ -13,9 +13,14 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+from campaigns.views import CampaignListView, CampaignDetailView
 from django.conf.urls import url
 from django.contrib import admin
+from django.views.generic import RedirectView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$', RedirectView.as_view(pattern_name='campaign-list', permanent=False), name='root'),
+    url(r'^campaigns/view/(?P<slug>[-\w]+)/', CampaignDetailView.as_view(), name='campaign-details'),
+    url(r'^campaigns/$', CampaignListView.as_view(), name='campaign-list'),
 ]

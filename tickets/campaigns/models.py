@@ -3,10 +3,15 @@ from django.db import models
 
 class Campaign(models.Model):
     title = models.CharField(max_length=200)
+    slug = models.CharField(max_length=50)
     opened = models.BooleanField(default=False)
 
     def __str__(self):
         return '{} [{}]'.format(self.title, 'opened' if self.opened else 'closed')
+
+    def get_absolute_url(self):
+        from django.core.urlresolvers import reverse
+        return reverse('campaign-details', args=[str(self.slug)])
 
 
 class TicketType(models.Model):
