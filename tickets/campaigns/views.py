@@ -1,9 +1,12 @@
+import logging
 from uuid import uuid4
 
 from campaigns.models import Campaign, TicketType, Cart, IssuedTicket
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.views.generic import ListView, DetailView, View
+
+logger = logging.getLogger(__name__)
 
 
 class CampaignListView(ListView):
@@ -30,6 +33,7 @@ class BuyTicketView(View):
         cart = Cart(uid="CART-{}".format(uuid4()),
                     ticket_type=tickettype)
         cart.save()
+        logger.info('Ticket {} added to cart {}'.format(tickettype, cart))
         return redirect(cart.get_absolute_url())
 
 
