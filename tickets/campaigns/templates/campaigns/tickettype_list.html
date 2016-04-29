@@ -1,0 +1,13 @@
+<h1>Campaigns</h1>
+<ul>
+    {% for tickettype in object_list %}
+    <li>{{tickettype.type}}, {{tickettype.cost}} UAH
+        <form action="{% url 'buy-ticket' tickettype.campaign.slug tickettype.id %}" method="POST">
+            {% csrf_token %}
+            <button name="buy" type="submit">Buy</button>
+        </form>
+    </li>
+    {% empty %}
+    <li>No ticket types available.</li>
+{% endfor %}
+</ul>

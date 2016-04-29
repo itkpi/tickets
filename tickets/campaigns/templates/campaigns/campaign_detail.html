@@ -1,9 +1,2 @@
 <h1>{{campaign.title}} {%if campaign.sandbox%}<font color="red">[SANDBOX]</font>{%endif%}</h1>
-<h2>Tickets:</h2>
-<ul>
-    {% for tickettype in campaign.tickettype_set.all %}
-    <li>{{tickettype.type}}, {{tickettype.cost}} UAH</li>
-    {% empty %}
-    <li>No ticket types available.</li>
-{% endfor %}
-</ul>
+<a href="{% url 'tickettypes-for-campaign-list' campaign.slug %}">Buy tickets</a>

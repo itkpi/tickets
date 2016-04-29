@@ -11,7 +11,7 @@ class Campaign(models.Model):
 
     def get_absolute_url(self):
         from django.core.urlresolvers import reverse
-        return reverse('campaign-details', args=[str(self.slug)])
+        return reverse('campaign-details', args=[self.slug])
 
 
 class TicketType(models.Model):
@@ -32,6 +32,10 @@ class IssuedTicket(models.Model):
     def __str__(self):
         return self.uid
 
+    def get_absolute_url(self):
+        from django.core.urlresolvers import reverse
+        return reverse('ticket-details', args=[self.uid])
+
 
 class Cart(models.Model):
     CART_CREATED = 'CREATED'
@@ -47,3 +51,7 @@ class Cart(models.Model):
 
     def __str__(self):
         return self.uid
+
+    def get_absolute_url(self):
+        from django.core.urlresolvers import reverse
+        return reverse('cart-details', args=[self.uid])
