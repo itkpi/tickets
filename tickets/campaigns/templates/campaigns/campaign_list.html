@@ -1,3 +1,5 @@
+{% extends "campaigns/base.html" %}
+{% block content %}
 <h1>Campaigns</h1>
 <ul>
 {% for campaign in object_list %}
@@ -6,3 +8,4 @@
     <li>No campaigns yet.</li>
 {% endfor %}
 </ul>
+{% endblock %}
