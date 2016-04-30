@@ -33,5 +33,5 @@ urlpatterns = [
     url(r'^ticket/(?P<slug>[-\w]+)/$', TicketDetailView.as_view(), name='ticket-details'),
 
     url(r'^api/v1/hello/$', HelloWorld.as_view(), name='api-hello'),
-    url(r'^api/v1/liqpay/cart/(?P<cart_uid>[-\w]+)/$', LiqPayS2S.as_view(), name='api-liqpay')
+    url(r'^api/v1/liqpay/$', LiqPayS2S.as_view(), name='api-liqpay')
 ]
