@@ -1,2 +1,5 @@
+{% extends "campaigns/base.html" %}
+{% block content %}
 <h1>{{campaign.title}} {%if campaign.sandbox%}<font color="red">[SANDBOX]</font>{%endif%}</h1>
-<a href="{% url 'tickettypes-for-campaign-list' campaign.slug %}">Buy tickets</a>
+<a href="{% url 'tickettypes-for-campaign-list' campaign.slug %}" style="color:#ccc">Buy tickets</a>
+{% endblock %}
