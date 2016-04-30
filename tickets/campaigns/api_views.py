@@ -36,11 +36,14 @@ class LiqPayS2S(Endpoint):
                 signature, calc_sign))
             return {'status': 'ERROR'}
 
-        decoded = json.loads(base64.b64decode(data).decode())
+        b64_decoded = base64.b64decode(data).decode()
+        logger.info(b64_decoded)
+        decoded = json.loads(b64_decoded)
         cart = Cart.objects.get(uid=decoded['order_id'])
         for key,value in decoded.items():
             lp_key = "lp_{}".format(key)
             if hasattr(cart, lp_key):
+                logger.info("set {}.{}={}".format(cart.uid, lp_key, value))
                 setattr(cart, lp_key, value)
         cart.save()
 
