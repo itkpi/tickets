@@ -1,8 +1,9 @@
 import base64
 import json
 import logging
+from uuid import uuid4
 
-from campaigns.models import Cart
+from campaigns.models import Cart, LiqPayData, IssuedTicket
 from liqpay.liqpay import LiqPay
 from restless.views import Endpoint
 from tickets.settings import LIQPAY_PUBLIC, LIQPAY_PRIVATE
@@ -23,11 +24,9 @@ class HelloWorld(Endpoint):
 class LiqPayS2S(Endpoint):
     def post(self, request):
         logger.info("LIQPAY: API Call from LiqPay: {}".format(str(request.POST)))
-        data = request.POST['data']
-        signature = request.POST['signature']
+        data, signature = request.POST['data'], request.POST['signature']
 
-        liqpay = LiqPay(LIQPAY_PUBLIC, LIQPAY_PRIVATE)
-        calc_sign = liqpay.str_to_sign(LIQPAY_PRIVATE.encode() + data.encode() + LIQPAY_PRIVATE.encode()).decode()
+        calc_sign = self.calculate_signature(data)
         logger.info("LIQPAY: data: {}, signature: {}, calculated signature {}".format(
             data, signature, calc_sign))
 
@@ -37,14 +36,39 @@ class LiqPayS2S(Endpoint):
             return {'status': 'ERROR'}
 
         b64_decoded = base64.b64decode(data).decode()
-        logger.info(b64_decoded)
+        logger.info("LIQPAY: decoded = {}".format(b64_decoded))
         decoded = json.loads(b64_decoded)
         cart = Cart.objects.get(uid=decoded['order_id'])
-        for key,value in decoded.items():
-            lp_key = "lp_{}".format(key)
-            if hasattr(cart, lp_key):
-                logger.info("set {}.{}={}".format(cart.uid, lp_key, value))
-                setattr(cart, lp_key, value)
+
+        self.persist_api_call(cart, decoded)
+
+        if decoded['status'] in ['failure', 'error']:
+            self.payment_failed(cart)
+        elif decoded['status'] in ['success', 'sandbox']:
+            self.payment_successful(cart)
+        return {'status': 'OK'}
+
+    def payment_failed(self, cart):
+        cart.status = cart.PAYMENT_FAILED
         cart.save()
 
-        return {'status': 'OK'}
+    def payment_successful(self, cart):
+        ticket = IssuedTicket(uid="".format(uuid4()), ticket_type=cart.ticket_type)
+        ticket.save()
+        cart.ticket = ticket
+        cart.status = cart.TICKET_ISSUED
+        cart.save()
+
+    def persist_api_call(self, cart, decoded):
+        lp_data = LiqPayData(cart=cart)
+        for key, value in decoded.items():
+            lp_key = "lp_{}".format(key)
+            if hasattr(lp_data, lp_key):
+                logger.info("set {}.{}={}".format(cart.uid, lp_key, value))
+                setattr(lp_data, lp_key, value)
+        lp_data.save()
+
+    def calculate_signature(self, data):
+        liqpay = LiqPay(LIQPAY_PUBLIC, LIQPAY_PRIVATE)
+        calc_sign = liqpay.str_to_sign(LIQPAY_PRIVATE.encode() + data.encode() + LIQPAY_PRIVATE.encode()).decode()
+        return calc_sign

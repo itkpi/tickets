@@ -52,6 +52,18 @@ class Cart(models.Model):
                               ))
     ticket = models.ForeignKey(IssuedTicket, null=True, default=None)
 
+    def __str__(self):
+        return self.uid
+
+
+    def get_absolute_url(self):
+        from django.core.urlresolvers import reverse
+        return reverse('cart-details', args=[self.uid])
+
+
+class LiqPayData(models.Model):
+    cart = models.ForeignKey(Cart)
+
     lp_action = models.CharField(max_length=50, null=True)
     lp_amount = models.DecimalField(max_digits=8, decimal_places=2, null=True)
     lp_code = models.CharField(max_length=50, null=True)
@@ -67,10 +79,3 @@ class Cart(models.Model):
     lp_status = models.CharField(max_length=50, null=True)
     lp_transaction_id = models.CharField(max_length=50, null=True)
     lp_type = models.CharField(max_length=50, null=True)
-
-    def __str__(self):
-        return self.uid
-
-    def get_absolute_url(self):
-        from django.core.urlresolvers import reverse
-        return reverse('cart-details', args=[self.uid])
