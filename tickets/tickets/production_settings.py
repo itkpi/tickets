@@ -24,3 +24,5 @@ LOGGING = {
         },
     },
 }
+
+CALLBACK_PREFIX = 'http://itkpi.pp.ua:8142'

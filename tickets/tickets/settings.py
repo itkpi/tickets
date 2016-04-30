@@ -126,6 +126,8 @@ STATIC_URL = '/static/'
 LIQPAY_PUBLIC = os.environ.get('LIQPAY_PUBLIC')
 LIQPAY_PRIVATE = os.environ.get('LIQPAY_PRIVATE')
 
+CALLBACK_PREFIX = 'http://127.0.0.1:8000'
+
 if os.environ.get('TICKETS_MODE') == 'PRODUCTION':
     from .production_settings import *
 else:

@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.views.generic import ListView, DetailView, View
 from liqpay.liqpay import LiqPay
-from tickets.settings import LIQPAY_PUBLIC, LIQPAY_PRIVATE
+from tickets.settings import LIQPAY_PUBLIC, LIQPAY_PRIVATE, CALLBACK_PREFIX
 
 logger = logging.getLogger(__name__)
 
@@ -59,8 +59,8 @@ class CartDetailView(DetailView):
             "order_id": cart.uid,
             "language": "ru",
             "sandbox": cart.ticket_type.campaign.sandbox,
-            "server_url": self.request.build_absolute_uri(reverse('api-liqpay', args=(cart.uid,))),
-            "result_url": self.request.build_absolute_uri(cart.get_absolute_url())
+            "server_url": CALLBACK_PREFIX + reverse('api-liqpay', args=(cart.uid,)),
+            "result_url": CALLBACK_PREFIX + cart.get_absolute_url()
         }
         logger.info(liqpay_data)
 
