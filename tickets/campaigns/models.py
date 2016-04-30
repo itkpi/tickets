@@ -40,14 +40,33 @@ class IssuedTicket(models.Model):
 class Cart(models.Model):
     CART_CREATED = 'CREATED'
     TICKET_ISSUED = 'TICKET_ISSUED'
+    PAYMENT_FAILED = 'PAYMENT_FAILED'
 
     uid = models.CharField(max_length=200, unique=True)
     timestamp = models.DateTimeField(auto_now=True)
     ticket_type = models.ForeignKey(TicketType)
     status = models.CharField(max_length=25, default=CART_CREATED,
                               choices=((CART_CREATED, 'Item in cart'),
-                                       (TICKET_ISSUED, 'Payment confirmed, ticket issued')))
+                                       (TICKET_ISSUED, 'Payment confirmed, ticket issued'),
+                                       (PAYMENT_FAILED, 'Payment failed'),
+                              ))
     ticket = models.ForeignKey(IssuedTicket, null=True, default=None)
+
+    lp_action = models.CharField(max_length=50, null=True)
+    lp_amount = models.DecimalField(max_digits=8, decimal_places=2, null=True)
+    lp_code = models.CharField(max_length=50, null=True)
+    lp_currency = models.CharField(max_length=50, null=True)
+    lp_err_code = models.CharField(max_length=50, null=True)
+    lp_err_description = models.CharField(max_length=255, null=True)
+    lp_ip = models.CharField(max_length=50, null=True)
+    lp_liqpay_order_id = models.CharField(max_length=50, null=True)
+    lp_payment_id = models.IntegerField(null=True)
+    lp_paytype = models.CharField(max_length=50, null=True)
+    lp_public_key = models.CharField(max_length=50, null=True)
+    lp_sender_card_mask2 = models.CharField(max_length=50, null=True)
+    lp_status = models.CharField(max_length=50, null=True)
+    lp_transaction_id = models.CharField(max_length=50, null=True)
+    lp_type = models.CharField(max_length=50, null=True)
 
     def __str__(self):
         return self.uid
