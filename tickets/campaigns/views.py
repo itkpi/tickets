@@ -59,8 +59,8 @@ class CartDetailView(DetailView):
             "order_id": cart.uid,
             "language": "ru",
             "sandbox": cart.ticket_type.campaign.sandbox,
-            "server_url": reverse('api-liqpay', args=(cart.uid,)),
-            "result_url": cart.get_absolute_url()
+            "server_url": self.request.build_absolute_uri(reverse('api-liqpay', args=(cart.uid,))),
+            "result_url": self.request.build_absolute_uri(cart.get_absolute_url())
         }
         logger.info(liqpay_data)
 

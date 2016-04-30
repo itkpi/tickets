@@ -1,3 +1,5 @@
+import os
+
 DEBUG = True
 
 LOGGING = {
@@ -22,3 +24,7 @@ LOGGING = {
         },
     },
 }
+
+
+LIQPAY_PUBLIC = 'public'
+LIQPAY_PRIVATE = 'private'
