@@ -63,6 +63,7 @@ class Cart(models.Model):
 
 class LiqPayData(models.Model):
     cart = models.ForeignKey(Cart)
+    timestamp = models.DateTimeField(auto_now=True, null=True)
 
     lp_action = models.CharField(max_length=50, null=True)
     lp_amount = models.DecimalField(max_digits=8, decimal_places=2, null=True)
