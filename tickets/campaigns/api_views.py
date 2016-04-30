@@ -53,7 +53,7 @@ class LiqPayS2S(Endpoint):
         cart.save()
 
     def payment_successful(self, cart):
-        ticket = IssuedTicket(uid="".format(uuid4()), ticket_type=cart.ticket_type)
+        ticket = IssuedTicket(uid="T-{}".format(uuid4()), ticket_type=cart.ticket_type)
         ticket.save()
         cart.ticket = ticket
         cart.status = cart.TICKET_ISSUED
