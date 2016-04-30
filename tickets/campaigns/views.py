@@ -51,7 +51,7 @@ class CartDetailView(DetailView):
         context = super().get_context_data(**kwargs)
 
         liqpay = LiqPay(LIQPAY_PUBLIC, LIQPAY_PRIVATE)
-        html = liqpay.cnb_form({
+        liqpay_data = {
             "action": "pay",
             "amount": str(cart.ticket_type.cost),
             "currency": "UAH",
@@ -61,7 +61,10 @@ class CartDetailView(DetailView):
             "sandbox": cart.ticket_type.campaign.sandbox,
             "server_url": reverse('api-liqpay', args=(cart.uid,)),
             "result_url": cart.get_absolute_url()
-        })
+        }
+        logger.info(liqpay_data)
+
+        html = liqpay.cnb_form(liqpay_data)
 
         context['liqpay_form'] = html
 
