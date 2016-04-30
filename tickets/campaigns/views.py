@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.views.generic import ListView, DetailView, View
 from liqpay.liqpay import LiqPay
-from tickets.settings import LIQPAY_PUBLIC, LIQPAY_PRIVATE, CALLBACK_PREFIX
+from tickets.settings import LIQPAY_PUBLIC, LIQPAY_PRIVATE
 
 logger = logging.getLogger(__name__)
 
