@@ -1,3 +1,6 @@
+{% extends "base.html" %}
+{%block title %} TedX {% endblock %}
+{% block content %}
 <h1>Campaigns</h1>
 <ul>
     {% for tickettype in object_list %}
@@ -11,3 +14,4 @@
     <li>No ticket types available.</li>
 {% endfor %}
 </ul>
+{% endblock %}
