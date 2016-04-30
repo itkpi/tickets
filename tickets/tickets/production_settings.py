@@ -1,5 +1,5 @@
 DEBUG = False
-ALLOWED_HOSTS = ['127.0.0.1', 'itkpi.pp.ua']
+ALLOWED_HOSTS = ['127.0.0.1', 'tickets.itkpi.pp.ua']
 STATIC_ROOT = '/home/tickets/static'
 
 LOGGING = {
@@ -25,4 +25,3 @@ LOGGING = {
     },
 }
 
-CALLBACK_PREFIX = 'http://itkpi.pp.ua:8142'
