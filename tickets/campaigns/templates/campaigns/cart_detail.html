@@ -4,12 +4,15 @@
 
 <p>
     Status:
-    Payment is not completed
+    Payment is not completed.
     {%if cart.status == 'CREATED'%}
         <p>
             {{liqpay_form|safe}}
         </p>
 
+    {%endif%}
+    {%if cart.status == 'PAYMENT_FAILED'%}
+        Payment failed.
     {%endif%}
     {%if cart.status == 'TICKET_ISSUED'%}
         Payment confirmed! <a href="{{ cart.ticket.get_absolute_url }}" rel="nofollow">View ticket</a>
