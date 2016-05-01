@@ -59,3 +59,4 @@ target/
 .idea
 
 *.sqlite3
+.python-version
