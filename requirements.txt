@@ -11,4 +11,4 @@ ptyprocess==0.5.1
 simplegeneric==0.8.1
 six==1.10.0
 traitlets==4.2.1
--e https+git://github.com/rrader/sdk-python@8e34a5c#egg=liqpay-sdk-python  # python3-ported version of an official SDK
+-e git+https://github.com/rrader/sdk-python@8e34a5c#egg=liqpay-sdk-python  # python3-ported version of an official SDK
