@@ -1,17 +1,43 @@
 {% extends "campaigns/base.html" %}
+{% load staticfiles %}
 {%block title %} TedX {% endblock %}
 {% block content %}
-<h1>Campaigns</h1>
-<ul>
-    {% for tickettype in object_list %}
-    <li>{{tickettype.type}}, {{tickettype.cost}} UAH
-        <form action="{% url 'buy-ticket' tickettype.campaign.slug tickettype.id %}" method="POST">
-            {% csrf_token %}
-            <button name="buy" type="submit">Buy</button>
-        </form>
-    </li>
-    {% empty %}
-    <li>No ticket types available.</li>
-{% endfor %}
-</ul>
+<h1>Квитки</h1>
+<div class="row">
+ {% for tickettype in object_list %}
+<div class="col col-xs-12 ticket">
+                <div class="row">
+                    <div class="col col-xs-6 ">
+                        <h3><b>{{tickettype.type}}</b></h3>
+                        <h5><b>Актова зала КПІ</b></h5>
+                        <p>Опис події(слоган події)</p>
+                        <img src="{% static 'pic/logo.png' %}" />
+                    </div>
+                    <div class="col col-xs-2 ticket-info">
+                        <p>Дата: 08.05.2016</p>
+                        <p>Початок: 18:00</p>
+                        <p>Ціна: {{tickettype.cost}} грн.</p>
+                    </div>
+                    <div class="col col-xs-4">
+<form action="{% url 'buy-ticket' tickettype.campaign.slug tickettype.id %}" method="POST" name="buy">
+ {% csrf_token %}
+                        <button class="icon-ticket" type="submit"></button>
+
+</form>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+	
+   {% empty %}
+    <h2>No ticket types available.</h2>
+
+
+{% endfor %}   
+</div>
+
 {% endblock %}

@@ -1,16 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
     {% load staticfiles %}
-    <link rel="stylesheet" href="{% static "css/main.css" %}" />
-    <title>{% block title %}Подія{% endblock %}</title>
+    <meta charset="utf-8">
+    <title>{% block title %}TEDxKPI Tickets{% endblock %}</title>
+ <link rel="stylesheet" href="{% static "css/layout.css" %}" />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </head>
+
 <body>
-  <header>
-    <h2>Події</h2>
-  </header>
-  <div id="content">
-    {% block content %}<h2>Tickets</h2>{% endblock %}
-  </div>
+    <header>
+        <img src="{% static "pic/logo-main.png" %}" alt="TEDxKPI" />
+    </header>
+    <div class="container" id="content">
+	{% block content %}<h2>Tickets</h2>{% endblock %}
+    </div>
 </body>
+
 </html>

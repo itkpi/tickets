@@ -1,0 +1,48 @@
+header {
+  border-bottom: 1px solid #ccc;
+  height: 50px; }
+  header img {
+    margin-top: 6px;
+    margin-left: 20px; }
+
+#content {
+  max-width: 900px;
+  margin-top: 2em; }
+  #content .ticket {
+    margin-bottom: 2em;
+    border: 1px solid #ccc;
+    padding: 1em; }
+    #content .ticket h3 {
+      margin-top: 0; }
+    #content .ticket .ticket-info {
+      margin-top: 2em;
+      font-weight: bold; }
+    #content .ticket .icon-ticket {
+      display: block;
+      margin: 2em auto;
+      background-position: 0 -334px;
+      background-color: Transparent;
+      border: none;
+      cursor:pointer;
+      overflow: hidden;
+      outline:none;
+      height: 108px;
+      width: 212px;
+      background-image: url("../pic/icon-s7737f17131.png");
+      background-repeat: no-repeat; }
+    #content .ticket .icon-ticket-success {
+      display: block;
+      margin: 2em auto;
+      background-position: 0 -654px;
+      background-color: Transparent;
+      border: none;
+      cursor:pointer;
+      overflow: hidden;
+      outline:none;
+      height: 108px;
+      width: 212px;
+      background-image: url("../pic/icon-s7737f17131.png");
+      background-repeat: no-repeat; }
+    #content .ticket .liqpay {
+	margin: 5em auto;
+    }
