@@ -5,6 +5,7 @@ class Campaign(models.Model):
     slug = models.CharField(max_length=50)
     opened = models.BooleanField(default=False)
     sandbox = models.BooleanField(default=True)
+    description = models.TextField(default="")
 
     def __str__(self):
         return '{} [{}]'.format(self.title, 'opened' if self.opened else 'closed')
@@ -42,6 +43,7 @@ class Cart(models.Model):
     TICKET_ISSUED = 'TICKET_ISSUED'
     PAYMENT_FAILED = 'PAYMENT_FAILED'
 
+    name = models.CharField(max_length=200, default='<noname>')
     uid = models.CharField(max_length=200, unique=True)
     timestamp = models.DateTimeField(auto_now=True)
     ticket_type = models.ForeignKey(TicketType)

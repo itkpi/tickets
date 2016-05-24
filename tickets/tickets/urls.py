@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from campaigns.api_views import HelloWorld, LiqPayS2S
-from campaigns.views import CampaignListView, CampaignDetailView, TicketTypeListView, BuyTicketView, CartDetailView, \
+from campaigns.views import CampaignListView, CampaignDetailView, TicketTypeListView, CartDetailView, \
     TicketDetailView
 from django.conf.urls import url
 from django.contrib import admin
@@ -27,8 +27,6 @@ urlpatterns = [
     url(r'^campaigns/$', CampaignListView.as_view(), name='campaign-list'),
     url(r'^campaigns/(?P<campaign_slug>[-\w]+)/tickets/$', TicketTypeListView.as_view(),
         name='tickettypes-for-campaign-list'),
-    url(r'^campaigns/(?P<campaign_slug>[-\w]+)/tickets/(?P<tickettype_id>\d+)/buy$', BuyTicketView.as_view(),
-        name='buy-ticket'),
     url(r'^cart/(?P<slug>[-\w]+)/$', CartDetailView.as_view(), name='cart-details'),
     url(r'^ticket/(?P<slug>[-\w]+)/$', TicketDetailView.as_view(), name='ticket-details'),
 
