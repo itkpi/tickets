@@ -8,7 +8,7 @@
     {%if form.errors%}
     <div class="alert alert-danger">{{form.errors}}</div>
     {%endif%}
-    <form method="POST" name="buy">
+    <form method="POST" name="buy">{% csrf_token %}
         <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" class="form-control" id="name" name="name">
@@ -28,11 +28,7 @@
                                 <p>Ціна: {{tickettype.cost}} грн.</p>
                             </div>
                             <div class="col col-xs-4">
-        <form action="{% url 'buy-ticket' tickettype.campaign.slug %}" method="POST" name="buy">
-         {% csrf_token %}
                                 <button class="icon-ticket" type="submit" name="submit" value="{{tickettype.id}}"></button>
-
-        </form>
                             </div>
                         </div>
                     </div>
