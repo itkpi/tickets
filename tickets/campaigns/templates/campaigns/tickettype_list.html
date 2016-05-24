@@ -10,7 +10,7 @@
     {%endif%}
     <form method="POST" name="buy">{% csrf_token %}
         <div class="form-group">
-            <label for="name">Name:</label>
+            <label for="name">Ваше ім'я та прізвище (повністю):</label>
             <input type="text" class="form-control" id="name" name="name">
         </div>
         {% for tickettype in object_list %}
