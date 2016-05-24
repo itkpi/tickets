@@ -42,6 +42,8 @@ class Cart(models.Model):
     CART_CREATED = 'CREATED'
     TICKET_ISSUED = 'TICKET_ISSUED'
     PAYMENT_FAILED = 'PAYMENT_FAILED'
+    PAYMENT_WAIT_ACCEPT = 'PAYMENT_WAIT_ACCEPT'
+    UNKNOWN_STATUS = 'UNKNOWN_STATUS'
 
     name = models.CharField(max_length=200, default='<noname>')
     uid = models.CharField(max_length=200, unique=True)
@@ -51,6 +53,8 @@ class Cart(models.Model):
                               choices=((CART_CREATED, 'Item in cart'),
                                        (TICKET_ISSUED, 'Payment confirmed, ticket issued'),
                                        (PAYMENT_FAILED, 'Payment failed'),
+                                       (PAYMENT_WAIT_ACCEPT, 'Payment is waiting for acceptance...'),
+                                       (UNKNOWN_STATUS, 'Unknown status, check LiqPay data')
                               ))
     ticket = models.ForeignKey(IssuedTicket, null=True, default=None)
 

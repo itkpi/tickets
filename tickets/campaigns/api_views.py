@@ -46,7 +46,19 @@ class LiqPayS2S(Endpoint):
             self.payment_failed(cart)
         elif decoded['status'] in ['success', 'sandbox']:
             self.payment_successful(cart)
+        elif decoded['status'] in ['wait_accept']:
+            self.payment_wait_accept(cart)
+        else:
+            self.payment_unknown_status(cart)
         return {'status': 'OK'}
+
+    def payment_wait_accept(self, cart):
+        cart.status = cart.PAYMENT_WAIT_ACCEPT
+        cart.save()
+
+    def payment_unknown_status(self, cart):
+        cart.status = cart.UNKNOWN_STATUS
+        cart.save()
 
     def payment_failed(self, cart):
         cart.status = cart.PAYMENT_FAILED

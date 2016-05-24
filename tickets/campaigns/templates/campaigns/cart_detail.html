@@ -21,6 +21,12 @@
     {%if cart.status == 'PAYMENT_FAILED'%}
         Payment failed.
     {%endif%}
+    {%if cart.status == 'PAYMENT_WAIT_ACCEPT'%}
+        Payment is done, waiting for LiqPay verification...
+    {%endif%}
+    {%if cart.status == 'UNKNOWN_STATUS'%}
+        Received unknown status from LiqPay. Please contact administrator.
+    {%endif%}
     {%if cart.status == 'TICKET_ISSUED'%}
         Оплату підтвердженно!
     {%endif%}</p>
