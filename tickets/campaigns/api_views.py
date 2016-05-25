@@ -66,9 +66,6 @@ class LiqPayS2S(Endpoint):
 
     def payment_successful(self, cart):
         ticket = issue_ticket(cart)
-        cart.ticket = ticket
-        cart.status = cart.TICKET_ISSUED
-        cart.save()
 
     def persist_api_call(self, cart, decoded):
         lp_data = LiqPayData(cart=cart)
