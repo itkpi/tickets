@@ -1,11 +1,37 @@
+{% load qr_tags %}
+
 {% block content %}
 <h1>Ticket for {{issuedticket.ticket_type.campaign.title}}</h1>
-<ul>
-    <li><b>{{issuedticket.uid}}</b></li>
-    <li>Campaign: {{issuedticket.ticket_type.campaign.title}}</li>
-    <li>Type: {{issuedticket.ticket_type.type}}</li>
-    <li>Cost: {{issuedticket.ticket_type.cost}} UAH</li>
-</ul>
 
-<h2>Thank you!</h2>
+<table>
+    <tr>
+        <td>
+            <ul>
+                <li><b>{{issuedticket.uid}}</b></li>
+                <li>Name: {{issuedticket.get_cart.name}}</li>
+                <li>Campaign: {{issuedticket.ticket_type.campaign.title}}</li>
+                <li>Type: {{issuedticket.ticket_type.type}}</li>
+                <li>Cost: {{issuedticket.ticket_type.cost}} UAH</li>
+            </ul>
+        </td>
+        <td>
+            <p>{% qr_from_object issuedticket %}</p>
+        </td>
+    </tr>
+</table>
+
+
+{% if user.is_superuser %}
+    <p>Hello, admin.</p>
+    <ul>
+        <li>Email: {{issuedticket.get_cart.email}}</li>
+        <li>
+            <form method="POST">{% csrf_token %}
+                <button type="submit" name="submit" value="checkin">Check in</button>
+            </form>
+        </li>
+    </ul>
+{% else %}
+    <h2>Thank you!</h2>
+{% endif %}
 {% endblock %}
