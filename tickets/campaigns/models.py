@@ -37,6 +37,9 @@ class IssuedTicket(models.Model):
         from django.core.urlresolvers import reverse
         return reverse('ticket-details', args=[self.uid])
 
+    def get_cart(self):
+        return self.cart_set.first()
+
 
 class Cart(models.Model):
     CART_CREATED = 'CREATED'
@@ -46,6 +49,7 @@ class Cart(models.Model):
     UNKNOWN_STATUS = 'UNKNOWN_STATUS'
 
     name = models.CharField(max_length=200, default='<noname>')
+    email = models.EmailField(max_length=200, null=True)
     uid = models.CharField(max_length=200, unique=True)
     timestamp = models.DateTimeField(auto_now=True)
     ticket_type = models.ForeignKey(TicketType)

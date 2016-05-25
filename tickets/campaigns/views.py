@@ -27,6 +27,7 @@ class CampaignDetailView(DetailView):
 
 class BuyTicketForm(forms.Form):
     name = forms.CharField()
+    email = forms.EmailField()
     submit = forms.IntegerField()
 
 

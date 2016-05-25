@@ -126,6 +126,9 @@ STATIC_URL = '/static/'
 LIQPAY_PUBLIC = os.environ.get('LIQPAY_PUBLIC')
 LIQPAY_PRIVATE = os.environ.get('LIQPAY_PRIVATE')
 
+FROM_EMAIL = 'tedx@itkpi.pp.ua'
+REPLY_EMAIL = 'tedx@itkpi.pp.ua'
+
 if os.environ.get('TICKETS_MODE') == 'PRODUCTION':
     from .production_settings import *
 else:

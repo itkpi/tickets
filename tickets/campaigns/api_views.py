@@ -1,9 +1,9 @@
 import base64
 import json
 import logging
-from uuid import uuid4
 
-from campaigns.models import Cart, LiqPayData, IssuedTicket
+from campaigns.models import Cart, LiqPayData
+from campaigns.ticket_utils import issue_ticket
 from liqpay.liqpay import LiqPay
 from restless.views import Endpoint
 from tickets.settings import LIQPAY_PUBLIC, LIQPAY_PRIVATE
@@ -65,8 +65,7 @@ class LiqPayS2S(Endpoint):
         cart.save()
 
     def payment_successful(self, cart):
-        ticket = IssuedTicket(uid="T-{}".format(uuid4()), ticket_type=cart.ticket_type)
-        ticket.save()
+        ticket = issue_ticket(cart)
         cart.ticket = ticket
         cart.status = cart.TICKET_ISSUED
         cart.save()
