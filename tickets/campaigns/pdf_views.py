@@ -4,6 +4,8 @@ from xhtml2pdf import pisa
 from django.http import HttpResponse
 from django.template.response import TemplateResponse
 from django.views.generic import TemplateView
+from datetime import date
+
 
 class PDFTemplateResponse(TemplateResponse):
 
@@ -17,6 +19,7 @@ class PDFTemplateResponse(TemplateResponse):
             return HttpResponse('We had some errors<pre>%s</pre>' % escape(html))
         else:
             self.content = result.getvalue()
+        self['Content-Disposition'] = 'attachment; filename="tedx-kpi-{}-ticket.pdf"'.format(date.today().year)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
