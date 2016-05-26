@@ -131,7 +131,7 @@ class TicketDetailEmailView(TicketDetailView):
 
 
 class TicketDetailPDFView(SingleObjectTemplateResponseMixin, BaseDetailView, PDFTemplateView):
-    template_name = 'campaigns/issuedticket_detail.html'
+    template_name = 'campaigns/issuedticket_pdf.html'
     model = IssuedTicket
 
     def get_slug_field(self):

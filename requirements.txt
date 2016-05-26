@@ -19,3 +19,12 @@ PyPDF2==1.26.0
 Pillow==3.2.0
 reportlab==3.3.0
 httplib2==0.9.2
+cairocffi==0.7.2
+CairoSVG==1.0.20
+cffi==1.6.0
+cssselect==0.9.1
+Pyphen==0.9.4
+WeasyPrint==0.28
+lxml==3.6.0
+pycparser==2.14
+tinycss==0.3

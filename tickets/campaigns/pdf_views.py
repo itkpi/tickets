@@ -1,5 +1,7 @@
 import io
 from html import escape
+
+from campaigns.ticket_utils import generate_pdf
 from xhtml2pdf import pisa
 from django.http import HttpResponse
 from django.template.response import TemplateResponse
@@ -12,13 +14,11 @@ class PDFTemplateResponse(TemplateResponse):
     def generate_pdf(self, retval):
         html = self.content
 
-        result = io.BytesIO()
-        rendering = pisa.CreatePDF(io.StringIO(html.decode('utf-8')), result)
-
-        if rendering.err:
-            return HttpResponse('We had some errors<pre>%s</pre>' % escape(html))
+        pdf = generate_pdf(html.decode('utf-8'))
+        if pdf:
+            self.content = pdf
         else:
-            self.content = result.getvalue()
+            return HttpResponse('We had some errors<pre>%s</pre>' % escape(html))
         self['Content-Disposition'] = 'attachment; filename="tedx-kpi-{}-ticket.pdf"'.format(date.today().year)
 
     def __init__(self, *args, **kwargs):
