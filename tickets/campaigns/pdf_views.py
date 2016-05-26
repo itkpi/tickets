@@ -1,5 +1,5 @@
 import io
-from cgi import escape
+from html import escape
 from xhtml2pdf import pisa
 from django.http import HttpResponse
 from django.template.response import TemplateResponse

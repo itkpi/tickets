@@ -6,11 +6,10 @@ from django.http import Http404
 from django.utils.translation import ugettext as _
 from django.core.urlresolvers import reverse
 from django import forms
-from django.http import HttpResponse
 from django.shortcuts import redirect
-from django.views.generic import ListView, DetailView, View
+from django.views.generic import ListView, DetailView
 from django.views.generic.edit import FormMixin
-from django.views.generic.detail import SingleObjectMixin, SingleObjectTemplateResponseMixin, BaseDetailView
+from django.views.generic.detail import SingleObjectTemplateResponseMixin, BaseDetailView
 from liqpay.liqpay import LiqPay
 from tickets.settings import LIQPAY_PUBLIC, LIQPAY_PRIVATE
 from campaigns.pdf_views import PDFTemplateView
@@ -125,6 +124,10 @@ class TicketDetailView(DetailView):
 
     def get_slug_field(self):
         return 'uid'
+
+
+class TicketDetailEmailView(TicketDetailView):
+    template_name_suffix = '_email'
 
 
 class TicketDetailPDFView(SingleObjectTemplateResponseMixin, BaseDetailView, PDFTemplateView):
