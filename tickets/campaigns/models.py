@@ -6,6 +6,9 @@ class Campaign(models.Model):
     opened = models.BooleanField(default=False)
     sandbox = models.BooleanField(default=True)
     description = models.TextField(default="")
+    place = models.CharField(max_length=400, default="<no place>")
+    date = models.DateField(null=True)
+    time = models.TimeField(null=True)
 
     def __str__(self):
         return '{} [{}]'.format(self.title, 'opened' if self.opened else 'closed')
