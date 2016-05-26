@@ -25,6 +25,6 @@ cffi==1.6.0
 cssselect==0.9.1
 Pyphen==0.9.4
 WeasyPrint==0.28
-lxml==3.6.0
+lxml==3.4.2
 pycparser==2.14
 tinycss==0.3
