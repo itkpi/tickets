@@ -31,7 +31,7 @@
             
             <label for="email">Ваш e-mail: *</label> {%if form.email.errors%}
     {% for error in form.email.errors %}<span class="label label-danger">{{error|escape}}</span>{%endfor%}{%endif%}
-            <input type="email" class="form-control" placeholder="michail@example.com" id="email" name="email" value="{%if form.email.value%}{{form.email.value}}{%endif%}">
+            <input type="email" class="form-control" placeholder="mykhailo@example.com" id="email" name="email" value="{%if form.email.value%}{{form.email.value}}{%endif%}">
             
             <label for="facebook_url">Профіль Facebook:</label> {%if form.facebook_url.errors%}
     {% for error in form.facebook_url.errors %}<span class="label label-danger">{{error|escape}}</span>{%endfor%}{%endif%}
