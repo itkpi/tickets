@@ -13,3 +13,9 @@ six==1.10.0
 traitlets==4.2.1
 -e git+https://github.com/rrader/sdk-python@8e34a5c#egg=liqpay-sdk-python  # python3-ported version of an official SDK
 django-qrcode==0.3
+xhtml2pdf==0.1a4
+html5lib==1.0b8
+PyPDF2==1.26.0
+Pillow==3.2.0
+reportlab==3.3.0
+httplib2==0.9.2

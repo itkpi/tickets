@@ -15,7 +15,7 @@ Including another URLconf
 """
 from campaigns.api_views import HelloWorld, LiqPayS2S
 from campaigns.views import CampaignListView, CampaignDetailView, TicketTypeListView, CartDetailView, \
-    TicketDetailView
+    TicketDetailView, TicketDetailPDFView
 from django.conf.urls import url
 from django.contrib import admin
 from django.views.generic import RedirectView
@@ -29,6 +29,7 @@ urlpatterns = [
         name='tickettypes-for-campaign-list'),
     url(r'^cart/(?P<slug>[-\w]+)/$', CartDetailView.as_view(), name='cart-details'),
     url(r'^ticket/(?P<slug>[-\w]+)/$', TicketDetailView.as_view(), name='ticket-details'),
+    url(r'^ticket/(?P<slug>[-\w]+)/pdf/$', TicketDetailPDFView.as_view(), name='ticket-details-pdf'),
 
     url(r'^api/v1/hello/$', HelloWorld.as_view(), name='api-hello'),
     url(r'^api/v1/liqpay/$', LiqPayS2S.as_view(), name='api-liqpay')

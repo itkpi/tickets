@@ -10,8 +10,11 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.views.generic import ListView, DetailView, View
 from django.views.generic.edit import FormMixin
+from django.views.generic.detail import SingleObjectMixin, SingleObjectTemplateResponseMixin, BaseDetailView
 from liqpay.liqpay import LiqPay
 from tickets.settings import LIQPAY_PUBLIC, LIQPAY_PRIVATE
+from campaigns.pdf_views import PDFTemplateView
+
 
 logger = logging.getLogger(__name__)
 
@@ -110,6 +113,14 @@ class CartDetailView(DetailView):
 
 
 class TicketDetailView(DetailView):
+    model = IssuedTicket
+
+    def get_slug_field(self):
+        return 'uid'
+
+
+class TicketDetailPDFView(SingleObjectTemplateResponseMixin, BaseDetailView, PDFTemplateView):
+    template_name = 'campaigns/issuedticket_detail.html'
     model = IssuedTicket
 
     def get_slug_field(self):
