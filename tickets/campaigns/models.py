@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.validators import RegexValidator
+
 
 class Campaign(models.Model):
     title = models.CharField(max_length=200)
@@ -51,7 +53,9 @@ class Cart(models.Model):
     PAYMENT_WAIT_ACCEPT = 'PAYMENT_WAIT_ACCEPT'
     UNKNOWN_STATUS = 'UNKNOWN_STATUS'
 
-    name = models.CharField(max_length=200, default='<noname>')
+    name = models.CharField(max_length=200, default='<no name>')
+    surname = models.CharField(max_length=200, default='<no surname>')
+    midname = models.CharField(max_length=200, default='<no midname>')
     email = models.EmailField(max_length=200, null=True)
     uid = models.CharField(max_length=200, unique=True)
     timestamp = models.DateTimeField(auto_now=True)
@@ -64,6 +68,12 @@ class Cart(models.Model):
                                        (UNKNOWN_STATUS, 'Unknown status, check LiqPay data')
                               ))
     ticket = models.ForeignKey(IssuedTicket, null=True, default=None)
+
+    phone_number = models.CharField(max_length=30, blank=True)
+    facebook_url = models.URLField(blank=True)
+    vk_url = models.URLField(blank=True)
+    residence = models.CharField(max_length=200, blank=True)
+    working_place = models.CharField(max_length=200, blank=True)
 
     def __str__(self):
         return self.uid

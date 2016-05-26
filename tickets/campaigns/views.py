@@ -30,7 +30,15 @@ class CampaignDetailView(DetailView):
 
 class BuyTicketForm(forms.Form):
     name = forms.CharField()
+    surname = forms.CharField()
+    midname = forms.CharField()
     email = forms.EmailField()
+    phone_number = forms.RegexField(regex=r'^\d{9,15}$', error_messages={'invalid': "Phone number must be entered in the format: '380501234567'. Up to 15 digits allowed."})
+    facebook_url = forms.URLField(required=False)
+    vk_url = forms.URLField(required=False)
+    residence = forms.CharField()
+    working_place = forms.CharField(required=False)
+
     submit = forms.IntegerField()
 
 
