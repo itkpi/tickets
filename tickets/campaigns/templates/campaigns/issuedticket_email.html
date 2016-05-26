@@ -84,13 +84,13 @@
       <table border="0" cellpadding="0" cellspacing="0"><tr><td style="vertical-align:undefined;width:150px;">
       <![endif]--><!--[if gte mso 9]>
           <td style="padding: 15px 10px">
-        <![endif]--><a href="{{ issuedticket.get_absolute_url }}" style="display:inline-block;text-decoration:none;text-transform:uppercase;color:#ff2b06;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;font-weight:normal;line-height:22px;padding:15px 10px;">Відкрити на сайті</a><!--[if gte mso 9]>
+        <![endif]--><a href="http://{{site.domain}}{% url 'ticket-details' issuedticket.uid %}" style="display:inline-block;text-decoration:none;text-transform:uppercase;color:#ff2b06;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;font-weight:normal;line-height:22px;padding:15px 10px;">Відкрити на сайті</a><!--[if gte mso 9]>
           </td>
         <![endif]--><!--[if mso | IE]>
       </td><td style="vertical-align:undefined;width:150px;">
       <![endif]--><!--[if gte mso 9]>
           <td style="padding: 15px 10px">
-        <![endif]--><a href="google.com" style="display:inline-block;text-decoration:none;text-transform:uppercase;color:#ff2b06;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;font-weight:normal;line-height:22px;padding:15px 10px;">Завантажити PDF</a><!--[if gte mso 9]>
+        <![endif]--><a href="http://{{site.domain}}{% url 'ticket-details-pdf' issuedticket.uid %}" style="display:inline-block;text-decoration:none;text-transform:uppercase;color:#ff2b06;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;font-weight:normal;line-height:22px;padding:15px 10px;">Завантажити PDF</a><!--[if gte mso 9]>
           </td>
         <![endif]--><!--[if mso | IE]>
       </td><td style="vertical-align:undefined;width:600px;">
