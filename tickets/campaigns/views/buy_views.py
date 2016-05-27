@@ -1,4 +1,5 @@
 from campaigns.models import Cart
+from campaigns.utils.ticket_utils import issue_ticket
 from campaigns.views.campaign_views import logger
 from django.core.urlresolvers import reverse
 from django.views.generic import DetailView
@@ -12,10 +13,23 @@ class CartDetailView(DetailView):
     def get_slug_field(self):
         return 'uid'
 
+    def get(self, request, **kwargs):
+        cart = self.get_object()
+        if cart.status == Cart.CART_CREATED and cart.ticket_type.cost == 0:
+            issue_ticket(cart)
+        return super().get(request, **kwargs)
+
     def get_context_data(self, **kwargs):
         cart = self.get_object()
         context = super().get_context_data(**kwargs)
 
+        if cart.status != Cart.TICKET_ISSUED:
+            html = self.get_liqpay_form(cart)
+            context['liqpay_form'] = html
+
+        return context
+
+    def get_liqpay_form(self, cart):
         liqpay = LiqPay(LIQPAY_PUBLIC, LIQPAY_PRIVATE)
         liqpay_data = {
             "action": "pay",
@@ -29,9 +43,5 @@ class CartDetailView(DetailView):
             "result_url": self.request.build_absolute_uri(cart.get_absolute_url())
         }
         logger.info(liqpay_data)
-
         html = liqpay.cnb_form(liqpay_data)
-
-        context['liqpay_form'] = html
-
-        return context
+        return html

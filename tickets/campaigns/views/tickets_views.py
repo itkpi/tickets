@@ -28,15 +28,16 @@ class BuyTicketForm(forms.Form):
     submit = forms.IntegerField()
 
 
-def available_tickettypes_queryset(campaign):
+def available_tickettypes_queryset(request, campaign):
     filter = TicketType.objects. \
         filter(campaign=campaign). \
-        filter(public=True). \
         annotate(issued_amount=Count('issuedticket')). \
         filter(Q(unlimited=True) | Q(unlimited=False, amount__gt=F('issued_amount'))). \
         filter(Q(available_from__isnull=True) | Q(available_from__isnull=False, available_from__lt=now())). \
         filter(Q(available_till__isnull=True) | Q(available_till__isnull=False, available_till__gt=now())). \
         order_by('cost')
+    if not request.user.is_superuser:
+        filter = filter.filter(public=True)
     return filter
 
 
@@ -49,7 +50,7 @@ class TicketTypeListView(ListView, FormMixin):
         return super().dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
-        filter = available_tickettypes_queryset(self.campaign)
+        filter = available_tickettypes_queryset(self.request, self.campaign)
         return filter
 
     def get_context_data(self, **kwargs):
