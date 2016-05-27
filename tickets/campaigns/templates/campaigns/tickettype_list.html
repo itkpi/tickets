@@ -26,7 +26,7 @@
     {% for error in form.phone_number.errors %}<span class="label label-danger">{{error|escape}}</span>{%endfor%}{%endif%}
             <div class="input-group">
               <span class="input-group-addon" id="phone_number-plus">+</span>
-              <input type="text" class="form-control"  placeholder="380001234567" aria-describedby="phone_number-plus" id="phone_number" value="{%if form.phone_number.value%}{{form.phone_number.value}}{%endif%}">
+              <input type="text" class="form-control"  placeholder="380001234567" aria-describedby="phone_number-plus" id="phone_number" name="phone_number" value="{%if form.phone_number.value%}{{form.phone_number.value}}{%endif%}">
             </div>
             
             <label for="email">Ваш e-mail: *</label> {%if form.email.errors%}
