@@ -1,13 +1,20 @@
-import io
+from datetime import date
 from html import escape
 
-from campaigns.ticket_utils import generate_pdf
-from xhtml2pdf import pisa
 from django.http import HttpResponse
 from django.template.response import TemplateResponse
 from django.views.generic import TemplateView
-from datetime import date
+from weasyprint import HTML
 
+
+def generate_pdf(body):
+    html = HTML(string=body)
+    main_doc = html.render()
+    pdf = main_doc.write_pdf()
+    return pdf
+
+
+# http://stackoverflow.com/questions/1377446/render-html-to-pdf-in-django-site
 
 class PDFTemplateResponse(TemplateResponse):
 
@@ -30,4 +37,3 @@ class PDFTemplateView(TemplateView):
     response_class = PDFTemplateResponse
     content_type = "application/pdf"
 
-# http://stackoverflow.com/questions/1377446/render-html-to-pdf-in-django-site

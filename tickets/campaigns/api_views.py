@@ -3,7 +3,7 @@ import json
 import logging
 
 from campaigns.models import Cart, LiqPayData
-from campaigns.ticket_utils import issue_ticket
+from campaigns.utils.ticket_utils import issue_ticket
 from liqpay.liqpay import LiqPay
 from restless.views import Endpoint
 from tickets.settings import LIQPAY_PUBLIC, LIQPAY_PRIVATE

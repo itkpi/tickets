@@ -23,7 +23,11 @@ class TicketType(models.Model):
     type = models.CharField(max_length=200)
     cost = models.DecimalField(max_digits=8, decimal_places=2)
     amount = models.IntegerField()
+    unlimited = models.BooleanField(default=False)
+    public = models.BooleanField(default=True)
     campaign = models.ForeignKey(Campaign)
+    available_from = models.DateTimeField(null=True, blank=True)
+    available_till = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return '"{}" ticket of <{}>'.format(self.type, self.campaign)

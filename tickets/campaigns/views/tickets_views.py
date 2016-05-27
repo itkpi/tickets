@@ -1,30 +1,17 @@
 import logging
 from uuid import uuid4
 
-from campaigns.models import Campaign, TicketType, Cart, IssuedTicket
-from django.http import Http404
-from django.utils.translation import ugettext as _
-from django.core.urlresolvers import reverse
+from campaigns.models import TicketType, Campaign, Cart
 from django import forms
+from django.db.models import Count, Q, F
+from django.http import Http404
 from django.shortcuts import redirect
-from django.views.generic import ListView, DetailView
+from django.utils.timezone import now
+from django.utils.translation import ugettext as _
+from django.views.generic import ListView
 from django.views.generic.edit import FormMixin
-from django.views.generic.detail import SingleObjectTemplateResponseMixin, BaseDetailView
-from liqpay.liqpay import LiqPay
-from tickets.settings import LIQPAY_PUBLIC, LIQPAY_PRIVATE
-from campaigns.pdf_views import PDFTemplateView
-
 
 logger = logging.getLogger(__name__)
-
-
-class CampaignListView(ListView):
-    model = Campaign
-    queryset = Campaign.objects.filter(opened=True)
-
-
-class CampaignDetailView(DetailView):
-    model = Campaign
 
 
 class BuyTicketForm(forms.Form):
@@ -41,6 +28,18 @@ class BuyTicketForm(forms.Form):
     submit = forms.IntegerField()
 
 
+def available_tickettypes_queryset(campaign):
+    filter = TicketType.objects. \
+        filter(campaign=campaign). \
+        filter(public=True). \
+        annotate(issued_amount=Count('issuedticket')). \
+        filter(Q(unlimited=True) | Q(unlimited=False, amount__gt=F('issued_amount'))). \
+        filter(Q(available_from__isnull=True) | Q(available_from__isnull=False, available_from__lt=now())). \
+        filter(Q(available_till__isnull=True) | Q(available_till__isnull=False, available_till__gt=now())). \
+        order_by('cost')
+    return filter
+
+
 class TicketTypeListView(ListView, FormMixin):
     model = TicketType
     form_class = BuyTicketForm
@@ -50,7 +49,8 @@ class TicketTypeListView(ListView, FormMixin):
         return super().dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
-        return TicketType.objects.filter(campaign=self.campaign).order_by('cost')
+        filter = available_tickettypes_queryset(self.campaign)
+        return filter
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -86,53 +86,3 @@ class TicketTypeListView(ListView, FormMixin):
             return redirect(cart.get_absolute_url())
         else:
             return self.get(request, *args, **kwargs)
-
-
-class CartDetailView(DetailView):
-    model = Cart
-
-    def get_slug_field(self):
-        return 'uid'
-
-    def get_context_data(self, **kwargs):
-        cart = self.get_object()
-        context = super().get_context_data(**kwargs)
-
-        liqpay = LiqPay(LIQPAY_PUBLIC, LIQPAY_PRIVATE)
-        liqpay_data = {
-            "action": "pay",
-            "amount": str(cart.ticket_type.cost),
-            "currency": "UAH",
-            "description": "{} ticket for {}".format(cart.ticket_type.type, cart.ticket_type.campaign.title),
-            "order_id": cart.uid,
-            "language": "ru",
-            "sandbox": cart.ticket_type.campaign.sandbox,
-            "server_url": self.request.build_absolute_uri(reverse('api-liqpay')),
-            "result_url": self.request.build_absolute_uri(cart.get_absolute_url())
-        }
-        logger.info(liqpay_data)
-
-        html = liqpay.cnb_form(liqpay_data)
-
-        context['liqpay_form'] = html
-
-        return context
-
-
-class TicketDetailView(DetailView):
-    model = IssuedTicket
-
-    def get_slug_field(self):
-        return 'uid'
-
-
-class TicketDetailEmailView(TicketDetailView):
-    template_name_suffix = '_email'
-
-
-class TicketDetailPDFView(SingleObjectTemplateResponseMixin, BaseDetailView, PDFTemplateView):
-    template_name = 'campaigns/issuedticket_pdf.html'
-    model = IssuedTicket
-
-    def get_slug_field(self):
-        return 'uid'

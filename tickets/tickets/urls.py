@@ -13,9 +13,13 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+from campaigns.views.buy_views import CartDetailView
+from campaigns.views.campaign_views import CampaignListView, CampaignDetailView
+from campaigns.views.tickets_views import TicketTypeListView
+from campaigns.views.issuedticket_views import TicketDetailView, TicketDetailEmailView, TicketDetailPDFView
+
 from campaigns.api_views import HelloWorld, LiqPayS2S
-from campaigns.views import CampaignListView, CampaignDetailView, TicketTypeListView, CartDetailView, \
-    TicketDetailView, TicketDetailPDFView, TicketDetailEmailView
+
 from django.conf.urls import url
 from django.contrib import admin
 from django.views.generic import RedirectView
