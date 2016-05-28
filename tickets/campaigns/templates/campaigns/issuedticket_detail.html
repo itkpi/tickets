@@ -55,7 +55,6 @@
 <body>
   {% if user.is_superuser %}
   <center>
-      <h1><a href="{% url 'qr-scan' %}">Сканувати QR код</a></h1>
         <p>
         {% if not issuedticket.checked_in %}
             <form method="POST" action="{% url 'check-in' %}">{% csrf_token %}

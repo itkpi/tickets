@@ -22,6 +22,7 @@ from campaigns.api_views import HelloWorld, LiqPayS2S
 
 from django.conf.urls import url
 from django.contrib import admin
+from django.contrib.auth.decorators import login_required
 from django.views.generic import RedirectView, TemplateView
 
 urlpatterns = [
@@ -36,7 +37,7 @@ urlpatterns = [
     url(r'^ticket/(?P<slug>[-\w]+)/pdf/$', TicketDetailPDFView.as_view(), name='ticket-details-pdf'),
     url(r'^ticket/(?P<slug>[-\w]+)/email/$', TicketDetailEmailView.as_view(), name='ticket-details-email'),
     url(r'^event/check-in/$', CheckInView.as_view(), name='check-in'),
-    url(r'^event/qr-scan/$', TemplateView.as_view(template_name='campaigns/qr_scan.html'), name='qr-scan'),
+    url(r'^event/qr-scan/$', login_required(TemplateView.as_view(template_name='campaigns/qr_scan.html'), login_url='/admin/login/'), name='qr-scan'),
 
     url(r'^api/v1/hello/$', HelloWorld.as_view(), name='api-hello'),
     url(r'^api/v1/liqpay/$', LiqPayS2S.as_view(), name='api-liqpay')
