@@ -1,0 +1,25 @@
+{% extends "campaigns/base.html" %}
+{% load staticfiles %}
+
+{% block header %}
+<script src="{% static 'jsqrcode-combined.min.js' %}"></script>
+<script src="{% static 'html5-qrcode.min.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+ <div id="reader" style="width:300px;height:250px">
+ </div>
+
+<script>
+    $('#reader').html5_qrcode(function(data){
+        window.location = data;
+    },
+    function(error){
+        //show read errors
+    }, function(videoError){
+        //the video stream could be opened
+    }
+);
+</script>
+{% endblock %}
