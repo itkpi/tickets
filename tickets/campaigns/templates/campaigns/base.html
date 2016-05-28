@@ -24,6 +24,11 @@
         <a href="{% url 'root' %}"><img src="{% static "pic/logo-main.png" %}" alt="TEDxKPI" /></a>
     </header>
     <div class="container" id="content">
+        {% if user.is_superuser %}
+          <center>
+                <h1><a href="{% url 'qr-scan' %}">Сканувати QR код</a></h1>
+          </center>
+        {% endif %}
 	{% block content %}<h2>Tickets</h2>{% endblock %}
     </div>
 
