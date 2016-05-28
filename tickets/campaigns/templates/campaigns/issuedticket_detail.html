@@ -59,10 +59,10 @@
         {% if not issuedticket.checked_in %}
             <form method="POST" action="{% url 'check-in' %}">{% csrf_token %}
                 <input type="hidden" value="{{issuedticket.uid}}" name="uid" />
-                <button type="submit" class="button" style="font-size : 20px; width: 100%; height: 100px;">Реєстрація власника білета на події</button>
+                <button type="submit" class="button" style="font-size : 20px; width: 100%; height: 100px;">Реєстрація власника квитка на події</button>
             </form>
         {% else %}
-            <h1>Власник білету зареєстрований на події</h1>
+            <h1>Власник квитка зареєстрований на події</h1>
         {% endif %}
         </p>
   </center>
