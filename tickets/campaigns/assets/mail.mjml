@@ -1,0 +1,61 @@
+<mjml>
+  <mj-body>
+    <mj-container>
+
+      <!-- Company Header -->
+      <mj-section background-color="#ff2b06">
+      	<mj-column>
+      		<mj-text font-size="24" color="white">TEDxKPI</mj-text>
+      	</mj-column>
+      	<mj-column>
+      		<mj-text color="white" align="right" font-size="20">21.06.2016 18:00</mj-text>
+		</mj-column>
+      </mj-section>
+
+      <!-- Image Header -->
+      <mj-section background-color="#f0f0f0" padding="0px 0px 0px 0px">
+      	<mj-text>У листі знаходиться копія квитка. Для того щоб потрапити на подію треба мати з собою квиток в фізичному варіанті.</mj-text>
+
+      </mj-section>
+
+      <!-- Ticket Section -->
+      <mj-section background-color="#fafafa">
+	  <mj-link href="google.com" color="#ff2b06">Відкрити на сайті</mj-link>
+	  <mj-link href="google.com" color="#ff2b06">Завантажити PDF</mj-link>
+       <mj-table>
+       		<tr style="border-bottom:1px solid #ecedee;text-align:left;padding:15px 0;">
+              <th style="padding: 0 15px 0 0;" colspan="3">TICKET TYPE</th>
+                <td style="padding: 0 0 0 15px;" rowspan="4"><img width="230" src="http://chart.apis.google.com/chart?cht=qr&chs=230x230&chl=http://tickets.itkpi.pp.ua/ticket/T-9fb95599-811a-411b-952d-a794d8c9173f/" />
+       </td>
+       		</tr>
+            <tr>
+              <td style="padding: 5px 15px 0 0;">Степанов Валентин</td>
+              <td style="padding: 5px 15px;">Дата: 21.06.2016</td>
+            
+            </tr>
+            <tr>
+              <td style="padding: 5px 15px 0 0;">Актова зала КПІ</td>
+              <td style="padding: 5px 15px;">Початок: 18:00</td>
+              
+            </tr>
+            <tr>
+            	<td style="padding: 5px 0 0 0;">Ціна: 200 грн.</td>
+            	<td style="padding: 10px 0 0 0; text-align:center; padding-left: 130px; font-size:10px;" colspan="3">T-9fb95599-811a-411b-952d-a794d8c9173f</td>
+            </tr>
+          </mj-table>
+      	<mj-section background-color="white">
+      	<mj-text font-size="14">До нас дістатися можна на метро.</mj-text>
+      	<mj-raw>
+      		<script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script><div style='overflow:hidden;height:440px;width:700px;'><div id='gmap_canvas' style='height:400px;width:600px;'></div><div></div><div></div><style>#gmap_canvas img{max-width:none!important;background:none!important}</style></div><script type='text/javascript'>function init_map(){var myOptions = {zoom:10,center:new google.maps.LatLng(50.449306,30.460681000000022),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(50.449306,30.460681000000022)});infowindow = new google.maps.InfoWindow({content:'<strong>TEDxKPI</strong><br>50.449382, 30.461258<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
+      		</mj-raw>
+      	</mj-section>
+
+
+      <!-- <mj-section background-color="#fbfbfb"></mj-section> -->
+
+      <!-- Social icons -->
+      <!-- <mj-section background-color="#f0f0f0"></mj-section> -->
+
+    </mj-container>
+  </mj-body>
+</mjml>
