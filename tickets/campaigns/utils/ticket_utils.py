@@ -22,3 +22,9 @@ def issue_ticket(cart):
 
 def generate_ticket_uid():
     return "T-{}".format(uuid4())
+
+
+def do_checkin(ticket):
+    logger.info("Guest with ticked {} checked in on the event".format(ticket.uid))
+    ticket.checked_in = True
+    ticket.save()

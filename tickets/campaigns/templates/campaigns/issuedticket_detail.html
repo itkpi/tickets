@@ -50,8 +50,23 @@
         width: 100% !important;
       }
     }
-  </style></head>
+  </style>
+</head>
 <body>
+  <center>
+      {% if user.is_superuser %}
+        <p>
+        {% if not issuedticket.checked_in %}
+            <form method="POST" action="{% url 'check-in' %}">{% csrf_token %}
+                <input type="hidden" value="{{issuedticket.uid}}" name="uid" />
+                <button type="submit" class="button" style="font-size : 20px; width: 100%; height: 100px;">Реєстрація власника білета на події</button>
+            </form>
+        {% else %}
+            <h1>Власник білету зареєстрований на події</h1>
+        {% endif %}
+        </p>
+      {% endif %}
+  </center>
   <div><!--[if mso | IE]>
       <table border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;">
         <tr>
@@ -126,19 +141,6 @@
             <!--[if mso | IE]>
       </td></tr></table>
       <![endif]--></tbody></table>
-      {% if user.is_superuser %}
-    <p>Hello, admin.</p>
-    <ul>
-        <li>Email: {{issuedticket.get_cart.email}}</li>
-        <li>
-            <form method="POST">{% csrf_token %}
-                <button type="submit" name="submit" value="checkin">Check in</button>
-            </form>
-        </li>
-    </ul>
-{% else %}
-    <h2>Thank you!</h2>
-{% endif %}
 
       </div><!--[if mso | IE]>
       </td></tr></table>

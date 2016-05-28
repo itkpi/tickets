@@ -16,7 +16,7 @@ Including another URLconf
 from campaigns.views.buy_views import CartDetailView
 from campaigns.views.campaign_views import CampaignListView, CampaignDetailView
 from campaigns.views.tickets_views import TicketTypeListView
-from campaigns.views.issuedticket_views import TicketDetailView, TicketDetailEmailView, TicketDetailPDFView
+from campaigns.views.issuedticket_views import TicketDetailView, TicketDetailEmailView, TicketDetailPDFView, CheckInView
 
 from campaigns.api_views import HelloWorld, LiqPayS2S
 
@@ -35,6 +35,7 @@ urlpatterns = [
     url(r'^ticket/(?P<slug>[-\w]+)/$', TicketDetailView.as_view(), name='ticket-details'),
     url(r'^ticket/(?P<slug>[-\w]+)/pdf/$', TicketDetailPDFView.as_view(), name='ticket-details-pdf'),
     url(r'^ticket/(?P<slug>[-\w]+)/email/$', TicketDetailEmailView.as_view(), name='ticket-details-email'),
+    url(r'^event/check-in/$', CheckInView.as_view(), name='check-in'),
 
     url(r'^api/v1/hello/$', HelloWorld.as_view(), name='api-hello'),
     url(r'^api/v1/liqpay/$', LiqPayS2S.as_view(), name='api-liqpay')

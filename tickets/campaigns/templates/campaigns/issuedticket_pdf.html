@@ -126,19 +126,8 @@
             <!--[if mso | IE]>
       </td></tr></table>
       <![endif]--></tbody></table>
-      {% if user.is_superuser %}
-    <p>Hello, admin.</p>
-    <ul>
-        <li>Email: {{issuedticket.get_cart.email}}</li>
-        <li>
-            <form method="POST">{% csrf_token %}
-                <button type="submit" name="submit" value="checkin">Check in</button>
-            </form>
-        </li>
-    </ul>
-{% else %}
+
     <h2>Thank you!</h2>
-{% endif %}
 
       </div><!--[if mso | IE]>
       </td></tr></table>
