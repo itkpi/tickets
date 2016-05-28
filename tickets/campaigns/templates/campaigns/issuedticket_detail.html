@@ -112,7 +112,9 @@
       <![endif]--></td></tr><tr><td style="word-break:break-word;font-size:0px;padding:10px 25px;" align="left"><table cellpadding="0" cellspacing="0" style="color:#000;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:22px;table-layout:auto;" width="100%" border="0">
             <tr style="border-bottom:1px solid #ecedee;text-align:left;padding:15px 0;">
               <th style="padding: 0 15px 0 0;" colspan="3">{{issuedticket.ticket_type.type}}</th>
-                <td style="padding: 0 0 0 15px;" rowspan="4">{% qr_from_object issuedticket %}</td>
+                {% with  "//"|add:site.domain|add:issuedticket.get_absolute_url as qr_url %}
+                <td style="padding: 0 0 0 15px;" rowspan="4">{% qr_from_text qr_url %}</td>
+                {% endwith %}
             </tr>
             <tr>
               <td style="padding: 5px 15px 0 0;">{{issuedticket.get_cart.name}}</td>
