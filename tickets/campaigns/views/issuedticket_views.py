@@ -8,6 +8,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import DetailView
 from django.views.generic.detail import SingleObjectTemplateResponseMixin, BaseDetailView
 from django.views.generic.edit import BaseFormView
+from tickets.settings import GOOGLE_MAPS_KEY
 
 
 class TicketDetailView(DetailView):
@@ -16,17 +17,29 @@ class TicketDetailView(DetailView):
     def get_slug_field(self):
         return 'uid'
 
+    def get_context_data(self, **kwargs):
+        d = super().get_context_data(**kwargs)
+        d.update({'GOOGLE_MAPS_KEY': GOOGLE_MAPS_KEY})
+        return d
+
 
 class TicketDetailEmailView(TicketDetailView):
-    template_name_suffix = '_email'
+    def get_context_data(self, **kwargs):
+        d = super().get_context_data(**kwargs)
+        d.update({'email': True})
+        return d
 
 
 class TicketDetailPDFView(SingleObjectTemplateResponseMixin, BaseDetailView, PDFTemplateView):
-    template_name = 'campaigns/issuedticket_pdf.html'
     model = IssuedTicket
 
     def get_slug_field(self):
         return 'uid'
+
+    def get_context_data(self, **kwargs):
+        d = super().get_context_data(**kwargs)
+        d.update({'pdf': True, 'GOOGLE_MAPS_KEY': GOOGLE_MAPS_KEY})
+        return d
 
 
 class CheckInForm(forms.Form):

@@ -75,7 +75,9 @@
       <table border="0" cellpadding="0" cellspacing="0"><tr><td style="vertical-align:top;width:300px;">
       <![endif]--><div aria-labelledby="mj-column-per-50" class="mj-column-per-50" style="vertical-align:top;display:inline-block;font-size:13px;text-align:left;width:100%;"><table cellpadding="0" cellspacing="0" width="100%" border="0"><tbody><tr><td style="word-break:break-word;font-size:0px;padding:10px 25px;" align="left"><div style="cursor:auto;color:white;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:24px;line-height:22px;">{{issuedticket.ticket_type.campaign.title}}</div></td></tr></tbody></table></div><!--[if mso | IE]>
       </td><td style="vertical-align:top;width:300px;">
-      <![endif]--><div aria-labelledby="mj-column-per-50" class="mj-column-per-50" style="vertical-align:top;display:inline-block;font-size:13px;text-align:left;width:100%;"><table cellpadding="0" cellspacing="0" width="100%" border="0"><tbody><tr><td style="word-break:break-word;font-size:0px;padding:10px 25px;" align="right"><div style="cursor:auto;color:white;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:20px;line-height:22px;">21.06.2016 18:00</div></td></tr></tbody></table></div><!--[if mso | IE]>
+      {%if not pdf%}
+      <![endif]--><div aria-labelledby="mj-column-per-50" class="mj-column-per-50" style="vertical-align:top;display:inline-block;font-size:13px;text-align:left;width:100%;"><table cellpadding="0" cellspacing="0" width="100%" border="0"><tbody><tr><td style="word-break:break-word;font-size:0px;padding:10px 25px;" align="right"><div style="cursor:auto;color:white;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:20px;line-height:22px;">{{issuedticket.ticket_type.campaign.date|date:"d.m.Y"}} {{issuedticket.ticket_type.campaign.time|time:"H:i"}}</div></td></tr></tbody></table></div><!--[if mso | IE]>
+      {%endif%}
       </td></tr></table>
       <![endif]--></td></tr></tbody></table></div><!--[if mso | IE]>
       </td></tr></table>
@@ -86,7 +88,11 @@
           <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
       <![endif]--><div style="margin:0 auto;max-width:600px;background:#f0f0f0;"><table cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:#f0f0f0;" align="center" border="0"><tbody><tr><td style="text-align:center;vertical-align:top;font-size:0px;padding:0px 0px 0px 0px;"><!--[if mso | IE]>
       <table border="0" cellpadding="0" cellspacing="0"><tr><td style="vertical-align:undefined;width:600px;">
-      <![endif]--></td></tr><!--[if mso | IE]>
+      <![endif]--></td></tr>
+      {% if email %}
+      <tr><td style="word-break:break-word;font-size:0px;padding:10px 25px;" align="left"><div style="cursor:auto;color:#000000;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:22px;">У листі знаходиться копія квитка. Для того щоб потрапити на подію треба мати з собою квиток в фізичному варіанті.</div></td></tr>
+      {% endif %}
+      <!--[if mso | IE]>
       </td></tr></table>
       <![endif]--></tbody></table></div><!--[if mso | IE]>
       </td></tr></table>
@@ -100,12 +106,13 @@
       <![endif]--><!--[if gte mso 9]>
           <td style="padding: 15px 10px">
         <![endif]--><!--[if gte mso 9]>
+        <![endif]-->{% if email %}<a href="http://{{site.domain}}{% url 'ticket-details' issuedticket.uid %}" style="display:inline-block;text-decoration:none;text-transform:uppercase;color:#ff2b06;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;font-weight:normal;line-height:22px;padding:15px 10px;">Відкрити на сайті</a>{% endif %}<!--[if gte mso 9]>
           </td>
         <![endif]--><!--[if mso | IE]>
       </td><td style="vertical-align:undefined;width:150px;">
       <![endif]--><!--[if gte mso 9]>
           <td style="padding: 15px 10px">
-        <![endif]--><a href="{{ issuedticket.get_absolute_url }}pdf/" style="display:inline-block;text-decoration:none;text-transform:uppercase;color:#ff2b06;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;font-weight:normal;line-height:22px;padding:15px 10px;">Завантажити PDF</a><!--[if gte mso 9]>
+        <![endif]-->{% if not pdf %}<a href="{{ issuedticket.get_absolute_url }}pdf/" style="display:inline-block;text-decoration:none;text-transform:uppercase;color:#ff2b06;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;font-weight:normal;line-height:22px;padding:15px 10px;">Завантажити PDF</a>{% endif %}<!--[if gte mso 9]>
           </td>
         <![endif]--><!--[if mso | IE]>
       </td><td style="vertical-align:undefined;width:600px;">
@@ -117,29 +124,34 @@
                 {% endwith %}
             </tr>
             <tr>
-              <td style="padding: 5px 15px 0 0;">{{issuedticket.get_cart.name}}</td>
-              <td style="padding: 5px 15px;">Дата: 21.06.2016</td>
+              <td style="padding: 5px 15px 0 0;">{{issuedticket.get_cart.name}} {{issuedticket.get_cart.surname}} {{issuedticket.get_cart.midname}}</td>
+              <td style="padding: 5px 15px;">Дата: {{issuedticket.ticket_type.campaign.date|date:"d.m.Y"}}</td>
             
             </tr>
             <tr>
-              <td style="padding: 5px 15px 0 0;">Актова зала КПІ</td>
-              <td style="padding: 5px 15px;">Початок: 18:00</td>
+              <td style="padding: 5px 15px 0 0;">{{issuedticket.ticket_type.campaign.place}}</td>
+              <td style="padding: 5px 15px;">Початок: {{issuedticket.ticket_type.campaign.time|time:"H:i"}}</td>
               
             </tr>
             <tr>
                 <td style="padding: 5px 0 0 0;">Ціна: {{issuedticket.ticket_type.cost}} грн.</td>
+                {%if not pdf%}
                 <td style="padding: 10px 0 0 0; text-align:center; padding-left: 130px; font-size:10px;" colspan="3">{{issuedticket.uid}}</td>
+                {%endif%}
             </tr>
           </table></td></tr><!--[if mso | IE]>
       </td><td style="vertical-align:undefined;width:150px;">
       <![endif]--><div style="margin:0 auto;max-width:150px;background:white;">
 
-
+        {%if pdf%}
+        <tr><td style="word-break:break-word;font-size:0px;padding:10px 25px;" align="left"><div style="cursor:auto;color:#000000;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:22px;line-height:25px;">{{issuedticket.uid}}</div></td></tr>
+        {%endif%}
+      <tr><td style="word-break:break-word;font-size:0px;padding:10px 25px;" align="left"><div style="cursor:auto;color:#000000;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:14px;line-height:22px;">До нас дістатися можна на метро.</div></td></tr>
 
       <table cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:white;" align="center" border="0"><tbody><tr><td style="text-align:center;vertical-align:top;font-size:0px;padding:20px 0px;"><!--[if mso | IE]>
       <table border="0" cellpadding="0" cellspacing="0"><tr><td style="vertical-align:undefined;width:150px;">
       <![endif]--></td></tr>
-            <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script><div style='overflow:hidden;height:440px;width:700px;'><div id='gmap_canvas' style='height:400px;width:600px;'></div><div></div><div></div><style>#gmap_canvas img{max-width:none!important;background:none!important}</style></div><script type='text/javascript'>function init_map(){var myOptions = {zoom:10,center:new google.maps.LatLng(50.449306,30.460681000000022),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(50.449306,30.460681000000022)});infowindow = new google.maps.InfoWindow({content:'<strong>TEDxKPI</strong><br>50.449382, 30.461258<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
+            <a href="https://www.google.com/maps/place/50.449382,+30.461258/"><img src="http://maps.googleapis.com/maps/api/staticmap?center=50.449382,+30.461258&zoom=15&scale=1&size=600x300&maptype=roadmap&key={{GOOGLE_MAPS_KEY}}&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:%7C50.449382,+30.461258" alt="Google Map of TEDX KPI"></a>
             <!--[if mso | IE]>
       </td></tr></table>
       <![endif]--></tbody></table>
