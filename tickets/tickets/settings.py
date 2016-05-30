@@ -134,6 +134,8 @@ LIQPAY_PRIVATE = os.environ.get('LIQPAY_PRIVATE')
 FROM_EMAIL = 'tedx@itkpi.pp.ua'
 REPLY_EMAIL = 'tedx@itkpi.pp.ua'
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 if os.environ.get('TICKETS_MODE') == 'PRODUCTION':
     from .production_settings import *
 else:
