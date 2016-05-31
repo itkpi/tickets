@@ -31,8 +31,8 @@ class BuyTicketForm(forms.Form):
 def available_tickettypes_queryset(request, campaign):
     filter = TicketType.objects. \
         filter(campaign=campaign). \
-        annotate(issued_amount=Count('issuedticket')). \
-        filter(Q(unlimited=True) | Q(unlimited=False, amount__gt=F('issued_amount'))). \
+        annotate(issued_amount=Count('counter__tickettype__issuedticket', distinct=True)). \
+        filter(Q(counter__unlimited=True) | Q(counter__unlimited=False, counter__amount__gt=F('issued_amount'))). \
         filter(Q(available_from__isnull=True) | Q(available_from__isnull=False, available_from__lt=now())). \
         filter(Q(available_till__isnull=True) | Q(available_till__isnull=False, available_till__gt=now())). \
         order_by('cost')

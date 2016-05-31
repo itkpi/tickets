@@ -1,8 +1,9 @@
 from django.contrib import admin
-from campaigns.models import Campaign, Cart, TicketType, IssuedTicket, LiqPayData
+from campaigns.models import Campaign, Cart, TicketType, IssuedTicket, LiqPayData, TicketCounter
 
 admin.site.register(Campaign)
 admin.site.register(TicketType)
 admin.site.register(Cart)
 admin.site.register(IssuedTicket)
 admin.site.register(LiqPayData)
+admin.site.register(TicketCounter)
