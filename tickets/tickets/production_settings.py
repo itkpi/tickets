@@ -12,6 +12,10 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
         },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler'
+        }
     },
     'loggers': {
         'django': {
@@ -22,6 +26,11 @@ LOGGING = {
         'campaigns': {
             'handlers': ['console'],
             'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
             'propagate': True,
         },
     },
