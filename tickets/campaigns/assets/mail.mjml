@@ -22,6 +22,32 @@
       <mj-section background-color="#fafafa">
 	  <mj-link href="google.com" color="#ff2b06">Відкрити на сайті</mj-link>
 	  <mj-link href="google.com" color="#ff2b06">Завантажити PDF</mj-link>
+	  </mj-section>
+	  <mj-section  padding="0">
+	  	<mj-column style="padding:0; margin: 0;">
+	  		
+	  	</mj-column>
+	  </mj-section>
+	  <mj-section style="padding:0; margin: 0;">
+	  	<mj-column padding="0" width="30%">
+	  	    <mj-text text-transform="uppercase" align="center">Тип квитка</mj-text>
+	  		<mj-text align="center">Степанов Валентин</mj-text>
+	  		<mj-text align="center">Дата: 21.06.2016</mj-text>
+	  		<mj-text align="center">Ціна: 200 грн.</mj-text>	  		
+	  	</mj-column>
+	  	<mj-column padding="0" width="30%">
+	  		<mj-text text-transform="uppercase" align="center">Регулар тікет</mj-text>
+	  		<mj-text align="center">Степанов Валентин</mj-text>
+	  		<mj-text align="center">Дата: 21.06.2016</mj-text>
+	  		<mj-text align="center">Ціна: 200 грн.</mj-text>
+	  	</mj-column>
+	  	<mj-column width="40%">
+	  		<mj-image padding="0" margin="0" width="230" src="http://chart.apis.google.com/chart?cht=qr&chs=230x230&chl=http://tickets.itkpi.pp.ua/ticket/T-9fb95599-811a-411b-952d-a794d8c9173f/"></mj-image>
+	  		<mj-text padding="0" margin="0" font-size="10" align="center">T-9fb95599-811a-411b-952d-a794d8c9173f</mj-text>
+	  	</mj-column>
+	  </mj-section>
+
+<mj-section>
        <mj-table>
        		<tr style="border-bottom:1px solid #ecedee;text-align:left;padding:15px 0;">
               <th style="padding: 0 15px 0 0;" colspan="3">TICKET TYPE</th>
