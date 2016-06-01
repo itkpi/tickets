@@ -55,7 +55,6 @@
                             <div class="col col-xs-6 ">
                                 <h3><b>{{tickettype.type}}</b> {%if not tickettype.public%}<span class="label label-info">Private</span>{%endif%}</h3>
                                 <h5><b>{{tickettype.campaign.place}}</b></h5>
-                                <p>{{tickettype.campaign.description|safe}}</p>
                                 <img src="{% static 'pic/logo.png' %}" />
                             </div>
                             <div class="col col-xs-2 ticket-info">
