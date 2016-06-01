@@ -116,7 +116,10 @@
           </td>
         <![endif]--><!--[if mso | IE]>
       </td><td style="vertical-align:undefined;width:600px;">
-      <![endif]--></td></tr><tr><td style="word-break:break-word;font-size:0px;padding:10px 25px;" align="left"><table cellpadding="0" cellspacing="0" style="color:#000;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:22px;table-layout:auto;" width="100%" border="0">
+      <![endif]--></td></tr>
+      {% if not email %}
+      <tr>      
+      <td style="word-break:break-word;font-size:0px;padding:10px 25px;" align="left"><table cellpadding="0" cellspacing="0" style="color:#000;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:22px;table-layout:auto;" width="100%" border="0">
             <tr style="border-bottom:1px solid #ecedee;text-align:left;padding:15px 0;">
               <th style="padding: 0 15px 0 0;" colspan="3">{{issuedticket.ticket_type.type}}</th>
                 {% with  "//"|add:site.domain|add:issuedticket.get_absolute_url as qr_url %}
@@ -139,7 +142,10 @@
                 <td style="padding: 10px 0 0 0; text-align:center; padding-left: 130px; font-size:10px;" colspan="3">{{issuedticket.uid}}</td>
                 {%endif%}
             </tr>
-          </table></td></tr><!--[if mso | IE]>
+          </table></td>          
+          </tr>
+          {% endif %}
+          <!--[if mso | IE]>
       </td><td style="vertical-align:undefined;width:150px;">
       <![endif]--><div style="margin:0 auto;max-width:150px;background:white;">
 
