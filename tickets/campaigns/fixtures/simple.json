@@ -1,0 +1,21 @@
+[
+{
+  "model": "campaigns.campaign",
+  "pk": 1,
+  "fields": {
+    "title": "Campaign 1",
+    "slug": "camp-1",
+    "opened": true,
+    "sandbox": true
+  }
+},
+{
+  "model": "campaigns.tickettype",
+  "pk": 1,
+  "fields": {
+    "type": "Ticket Type 1",
+    "cost": "100.00",
+    "campaign": 1
+  }
+}
+]

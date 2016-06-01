@@ -2,7 +2,7 @@ import logging
 from uuid import uuid4
 
 from campaigns.models import IssuedTicket
-from campaigns.utils.email import notify_owner
+from campaigns.utils.email_utils import notify_owner
 
 logger = logging.getLogger(__name__)
 

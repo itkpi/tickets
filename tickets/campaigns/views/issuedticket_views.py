@@ -1,5 +1,5 @@
 from campaigns.models import IssuedTicket
-from campaigns.utils.pdf import PDFTemplateView
+from campaigns.utils.pdf_utils import PDFTemplateView
 from campaigns.utils.ticket_utils import do_checkin
 from django import forms
 from django.contrib.auth.decorators import login_required
