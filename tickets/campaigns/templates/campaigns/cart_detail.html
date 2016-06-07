@@ -13,21 +13,6 @@
                     <div class="col col-xs-2 ticket-info">
                         <p>Дата та час: <br>{{cart.ticket_type.campaign.date|date:"d E Y"}} о {{cart.ticket_type.campaign.time|time:"H:i"}}</p>
                         <p>Ціна: {{cart.ticket_type.cost}} грн.</p>
-<p>Статус: {%if cart.status == 'CREATED'%}
-        Payment is not completed.
-    {%endif%}
-    {%if cart.status == 'PAYMENT_FAILED'%}
-        Payment failed.
-    {%endif%}
-    {%if cart.status == 'PAYMENT_WAIT_ACCEPT'%}
-        Payment is done, waiting for LiqPay verification...
-    {%endif%}
-    {%if cart.status == 'UNKNOWN_STATUS'%}
-        Received unknown status from LiqPay. Please contact administrator.
-    {%endif%}
-    {%if cart.status == 'TICKET_ISSUED'%}
-        Оплату підтвердженно!
-    {%endif%}</p>
                     </div>
                     <div class="col col-xs-4">
 {% if cart.status == 'CREATED' %}
@@ -37,6 +22,29 @@
 {%if cart.status == 'TICKET_ISSUED'%}
         <a class="icon-ticket-success" href="{{ cart.ticket.get_absolute_url }}" rel="nofollow"></a>
 {%endif%}
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 10px">
+                    <div class="col col-xs-12">
+                        <p class="alert alert-info"><b>Статус:</b> {%if cart.status == 'CREATED'%}
+        Оплата ще не здійснена.
+    {%endif%}
+    {%if cart.status == 'PAYMENT_FAILED'%}
+        Помилка оплати.
+    {%endif%}
+    {%if cart.status == 'PAYMENT_WAIT_ACCEPT'%}
+        Успішна оплата, очікування верифікації зі сторони LiqPay...
+    {%endif%}
+    {%if cart.status == 'UNKNOWN_STATUS'%}
+        {% if liqpay_data.lp_status == 'cash_wait' %}
+            Ви обрали оплату готівкою. Оплатіть через термінал ПриватБанку за номером рахунку <i>{{liqpay_data.lp_payment_id}}</i>.
+        {% else %}
+        Отриманий неочікуваний статус платежу, якщо у вас є питання - звертайтесь до організаторів.
+        {% endif %}
+    {%endif%}
+    {%if cart.status == 'TICKET_ISSUED'%}
+        Оплату підтвердженно!
+    {%endif%}</p>
                     </div>
                 </div>
             </div>

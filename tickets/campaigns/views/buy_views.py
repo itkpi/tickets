@@ -1,4 +1,4 @@
-from campaigns.models import Cart
+from campaigns.models import Cart, LiqPayData
 from campaigns.utils.ticket_utils import issue_ticket
 from campaigns.views.campaign_views import logger
 from django.core.urlresolvers import reverse
@@ -26,6 +26,8 @@ class CartDetailView(DetailView):
         if cart.status != Cart.TICKET_ISSUED:
             html = self.get_liqpay_form(cart)
             context['liqpay_form'] = html
+
+        context['liqpay_data'] = LiqPayData.objects.filter(cart=cart).order_by('-timestamp').first()
 
         return context
 
