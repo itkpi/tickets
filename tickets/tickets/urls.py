@@ -16,7 +16,7 @@ Including another URLconf
 from campaigns.views.buy_views import CartDetailView
 from campaigns.views.campaign_views import CampaignListView, CampaignDetailView
 from campaigns.views.tickets_views import TicketTypeListView
-from campaigns.views.issuedticket_views import TicketDetailView, TicketDetailEmailView, TicketDetailPDFView, CheckInView
+from campaigns.views.issuedticket_views import TicketDetailView, TicketDetailEmailView, TicketDetailPDFView, CheckInView, TicketEmailSendView
 
 from campaigns.api_views import HelloWorld, LiqPayS2S
 
@@ -36,6 +36,7 @@ urlpatterns = [
     url(r'^ticket/(?P<slug>[-\w]+)/$', TicketDetailView.as_view(), name='ticket-details'),
     url(r'^ticket/(?P<slug>[-\w]+)/pdf/$', TicketDetailPDFView.as_view(), name='ticket-details-pdf'),
     url(r'^ticket/(?P<slug>[-\w]+)/email/$', TicketDetailEmailView.as_view(), name='ticket-details-email'),
+    url(r'^ticket/(?P<slug>[-\w]+)/send-email/$', TicketEmailSendView.as_view(), name='ticket-send-notification'),
     url(r'^event/check-in/$', CheckInView.as_view(), name='check-in'),
     url(r'^event/qr-scan/$', login_required(TemplateView.as_view(template_name='campaigns/qr_scan.html'), login_url='/admin/login/'), name='qr-scan'),
 

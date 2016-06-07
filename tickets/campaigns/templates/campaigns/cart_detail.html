@@ -1,19 +1,17 @@
 {% extends "campaigns/base.html" %}
 {% load staticfiles %}
-{%block title %} TedX - Корзина {% endblock %}
+{%block title %}TEDx KPI - Кошик {% endblock %}
 {% block content %}
 <h1>Кошик</h1>
 <div class="col col-xs-12 ticket">
                 <div class="row">
                     <div class="col col-xs-6 ">
                         <h3><b>{{cart.ticket_type.type}}</b></h3>
-                        <h5><b>Актова зала КПІ</b></h5>
-                        <p>{{ cart.ticket_type.campaign.description|safe }}</p>
+                        <h5><b>{{ cart.ticket_type.campaign.place }}</b></h5>
                         <img src="{% static 'pic/logo.png' %}" />
                     </div>
                     <div class="col col-xs-2 ticket-info">
-                        <p>Дата: 08.05.2016</p>
-                        <p>Початок: 18:00</p>
+                        <p>Дата та час: <br>{{cart.ticket_type.campaign.date|date:"d E Y"}} о {{cart.ticket_type.campaign.time|time:"H:i"}}</p>
                         <p>Ціна: {{cart.ticket_type.cost}} грн.</p>
 <p>Статус: {%if cart.status == 'CREATED'%}
         Payment is not completed.

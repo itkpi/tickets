@@ -3,8 +3,8 @@
   "model": "campaigns.campaign",
   "pk": 1,
   "fields": {
-    "title": "Test",
-    "slug": "test",
+    "title": "Campaign 1",
+    "slug": "camp-1",
     "opened": true,
     "sandbox": true
   }
@@ -13,9 +13,8 @@
   "model": "campaigns.tickettype",
   "pk": 1,
   "fields": {
-    "type": "Early Bird",
+    "type": "Ticket Type 1",
     "cost": "100.00",
-    "amount": 5,
     "campaign": 1
   }
 },
@@ -23,9 +22,8 @@
   "model": "campaigns.tickettype",
   "pk": 2,
   "fields": {
-    "type": "Regular",
-    "cost": "150.00",
-    "amount": 20,
+    "type": "Ticket Type 2",
+    "cost": "200.00",
     "campaign": 1
   }
 }
