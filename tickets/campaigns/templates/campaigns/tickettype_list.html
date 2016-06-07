@@ -54,7 +54,7 @@
                             <div class="col col-xs-6 ">
                                 <h3><b>{{tickettype.type}}</b> {%if not tickettype.public%}<span class="label label-info">Private</span>{%endif%}</h3>
                                 <h5><b>{{tickettype.campaign.place}}</b></h5>
-                                <img src="{% static 'pic/logo.png' %}" />
+                                <img src="{% static 'pic/logo-main.png' %}" height="50px" />
                             </div>
                             <div class="col col-xs-2 ticket-info">
                                 <p>Дата: {{tickettype.campaign.date|date:"d.m.Y"}}</p>
