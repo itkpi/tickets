@@ -32,6 +32,7 @@ class TicketDetailEmailView(TicketDetailView):
 
 
 class TicketDetailPDFView(SingleObjectTemplateResponseMixin, BaseDetailView, PDFTemplateView):
+    template_name_suffix = '_pdf'
     model = IssuedTicket
 
     def get_slug_field(self):

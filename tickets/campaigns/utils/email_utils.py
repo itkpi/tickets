@@ -19,7 +19,7 @@ def notify_owner(ticket):
                                                                          'site': Site.objects.get_current(),
                                                                          'email': True,
                                                                          'GOOGLE_MAPS_KEY': GOOGLE_MAPS_KEY})
-    details_body = render_to_string('campaigns/issuedticket_detail.html', {'issuedticket': ticket,
+    details_body = render_to_string('campaigns/issuedticket_pdf.html', {'issuedticket': ticket,
                                                                            'site': Site.objects.get_current(),
                                                                            'pdf': True,
                                                                            'GOOGLE_MAPS_KEY': GOOGLE_MAPS_KEY})
