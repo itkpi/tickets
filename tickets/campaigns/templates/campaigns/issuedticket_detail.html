@@ -106,10 +106,9 @@
       <![endif]--><div aria-labelledby="mj-column-per-35" class="mj-column-per-35" style="vertical-align:top;display:inline-block;font-size:13px;text-align:left;width:100%;"><table cellpadding="0" cellspacing="0" width="100%" border="0"><tbody><tr><td style="word-break:break-word;font-size:0px;padding:0px 5px;" align="left"><ul style="display:inline-block;padding-left:10px;text-align:left;color:#000000;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:22px;">
             {% if email %}<li><a href="http://{{site.domain}}{% url 'ticket-details' issuedticket.uid %}" style="background-color:#fff;display:block; margin-top:-6px; width:155px; text-align: center; text-decoration:none; color:black; margin-bottom:21px; padding:2.5px 0;">Відкрити на сайті</a></li>
             {%else%}
-            <form action="{% url 'ticket-send-notification' issuedticket.uid %}" method="post" style="margin: 0; padding: 0; display: inline;">{% csrf_token %}
+            <form id="resend-email-form" action="{% url 'ticket-send-notification' issuedticket.uid %}" method="post" style="margin: 0; padding: 0; display: inline;"></form>{% csrf_token %}
                 <input type="hidden" name="uid" value="{{issuedticket.uid}}">
-                <li><a href="#" onclick="parentNode.submit();" style="background-color:#fff;display:block; margin-top:-6px; width:155px; text-align: center; text-decoration:none; color:black; margin-bottom:21px; padding:2.5px 0;">Відправити лист ще раз</a></li>
-            </form>
+                <li><a href="#" onclick="document.getElementById('resend-email-form').submit();" style="background-color:#fff;display:block; margin-top:-6px; width:155px; text-align: center; text-decoration:none; color:black; margin-bottom:21px; padding:2.5px 0;">Відправити лист ще раз</a></li>
              {%endif %}
             {% if not pdf %}<li><a href="http://{{site.domain}}{{ issuedticket.get_absolute_url }}pdf/" style="background-color:#fff;display:block; heigth:25px;width:155px; text-align: center; text-decoration:none; color:black;padding:2.5px 0;">Завантажити pdf</a></li>{% endif %}
           </ul></td></tr></tbody></table></div><!--[if mso | IE]>
