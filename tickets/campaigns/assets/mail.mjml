@@ -1,61 +1,75 @@
 <mjml>
-  <mj-body>
+	<mj-head>
+	 <mj-attributes>
+       <mj-text padding="0 31px" font-family='"Helvetica Neue", HelveticaNeue, "TeX Gyre Heros", TeXGyreHeros, FreeSans, "Nimbus Sans L", "Liberation Sans", Arimo, Helvetica, Arial, "Open Sans Condensed", sans-serif' color="#fff"/>
+       <mj-image padding="0" />
+       <mj-class name="qr" padding="5px 31px 0 0" />
+       <mj-class name="visitor" padding="0 0 25px 31px" />
+       <mj-class name="place" padding="31px 0 31px 0"/>
+       <mj-class name="buttons" padding="0 5px"/>
+       <mj-class name="info" padding-bottom="10px" />
+       <mj-class name="info-sm" padding-bottom="5px" />
+       <mj-class name="thx" color="#fff" font-size="12px" font-weight="lighter" line-height="21px">
+     </mj-attributes>
+		<mj-html>
+			<mj-font href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+			<mj-font href='https://fonts.googleapis.com/css?family=Arimo:400,700' rel='stylesheet' type='text/css'>
+		</mj-html>
+	</mj-head>
+   <mj-body>
     <mj-container>
-
       <!-- Company Header -->
-      <mj-section background-color="#ff2b06">
-      	<mj-column>
-      		<mj-text font-size="24" color="white">TEDxKPI</mj-text>
+      <mj-section background-color="#000000" padding="31px">
+      	<mj-column width="100%">
+      		<mj-image height="93px" width="418px" align="left" src="http://127.0.0.1:8000/static/pic/logo-bl.png"/>
       	</mj-column>
-      	<mj-column>
-      		<mj-text color="white" align="right" font-size="20">21.06.2016 18:00</mj-text>
-		</mj-column>
       </mj-section>
+	 <mj-section padding="0px" background-color="#000">
+	 	<mj-column width="65%" style="padding:0px">
+	 	<mj-text font-size='28px' color="#fff" font-weight="bold" mj-class="visitor">Степанов Валентин</mj-text>
+	 	<mj-text color="#fff" font-size="21px" font-weight="lighter" mj-class="info">Студентський квиток</mj-text>
+	 	<mj-text color="#fff" font-size="17px" font-weight="bold" padding-bottom="40px">Ціна: 200.00 грн.</mj-text>
+	 	<mj-text color="#fff" font-size="17px" align="right" font-weight="bold" mj-class="info-sm">Дата: 25.06.2016</mj-text>
+	 	<mj-text color="#fff" font-size="17px" align="right" font-weight="bold" mj-class="info-sm">Початок: 18:00</mj-text>
+	 	</mj-column>
+	 	<mj-column width="35%">
+	 	<mj-image src='https://chart.googleapis.com/chart?cht=qr&chs=230x230&chl=//tickets.itkpi.pp.ua/ticket/T-50354de0-3fef-4b0e-afcd-7ecf19b7ce1e/' mj-class="qr"/>
+	 	<mj-text font-size="9px" padding="0 30px 0 0" align="center">T-25fcb25d-c067-4d2d-9640-fef4c2d0c39b</mj-text>
+	 	</mj-column>
+	 </mj-section>     
+	 <mj-section background-color="#000" mj-class="place">
+	 	<mj-column width="65%">
+	 		<mj-text color="#fff" font-size="21px" font-weight="bold" line-height="30px" >Місце проведення:</mj-text>
+	 		<mj-text color="#fff" font-size="21px" font-weight="300" line-height="30px">Державний політехнічний музей
+просп. Перемоги, 37, корп. 6</mj-text>
+	 	</mj-column>
+	 	<mj-column width="35%">
+	 	<mj-list mj-class="buttons">
+            <li><a href='#' style="background-color:#fff;display:block; margin-top:-6px; width:130px; text-align: center; text-decoration:none; color:black; margin-bottom:21px; padding:2.5px 0;">Відкрити на сайті</a></li>
+            <li><a href='#' style="background-color:#fff;display:block; heigth:25px;width:130px; text-align: center; text-decoration:none; color:black;padding:2.5px 0;">Завантажити pdf</a></li>
+          </mj-list>			
+	 	</mj-column>
+	 </mj-section>
+	 <mj-section background-color="#000" padding="0" mj-class="">
+	 <mj-column width="65%" margin="0">
+	 	<mj-text mj-class="thx" padding-bottom="60px">
+	 		Дякуємо, що вирішили приєднатись та бажаємо гарно провести час! 
 
-      <!-- Image Header -->
-      <mj-section background-color="#f0f0f0" padding="0px 0px 0px 0px">
-      	<mj-text>У листі знаходиться копія квитка. Для того щоб потрапити на подію треба мати з собою квиток в фізичному варіанті.</mj-text>
+Просто роздрукуйте квиток та візміть його з собою або завантажте на мобільний телефон. 
 
-      </mj-section>
-
-      <!-- Ticket Section -->
-      <mj-section background-color="#fafafa">
-	  <mj-link href="google.com" color="#ff2b06">Відкрити на сайті</mj-link>
-	  <mj-link href="google.com" color="#ff2b06">Завантажити PDF</mj-link>
-       <mj-table>
-       		<tr style="border-bottom:1px solid #ecedee;text-align:left;padding:15px 0;">
-              <th style="padding: 0 15px 0 0;" colspan="3">TICKET TYPE</th>
-                <td style="padding: 0 0 0 15px;" rowspan="4"><img width="230" src="http://chart.apis.google.com/chart?cht=qr&chs=230x230&chl=http://tickets.itkpi.pp.ua/ticket/T-9fb95599-811a-411b-952d-a794d8c9173f/" />
-       </td>
-       		</tr>
-            <tr>
-              <td style="padding: 5px 15px 0 0;">Степанов Валентин</td>
-              <td style="padding: 5px 15px;">Дата: 21.06.2016</td>
-            
-            </tr>
-            <tr>
-              <td style="padding: 5px 15px 0 0;">Актова зала КПІ</td>
-              <td style="padding: 5px 15px;">Початок: 18:00</td>
-              
-            </tr>
-            <tr>
-            	<td style="padding: 5px 0 0 0;">Ціна: 200 грн.</td>
-            	<td style="padding: 10px 0 0 0; text-align:center; padding-left: 130px; font-size:10px;" colspan="3">T-9fb95599-811a-411b-952d-a794d8c9173f</td>
-            </tr>
-          </mj-table>
-      	<mj-section background-color="white">
-      	<mj-text font-size="14">До нас дістатися можна на метро.</mj-text>
-      	<mj-raw>
-      		<script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script><div style='overflow:hidden;height:440px;width:700px;'><div id='gmap_canvas' style='height:400px;width:600px;'></div><div></div><div></div><style>#gmap_canvas img{max-width:none!important;background:none!important}</style></div><script type='text/javascript'>function init_map(){var myOptions = {zoom:10,center:new google.maps.LatLng(50.449306,30.460681000000022),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(50.449306,30.460681000000022)});infowindow = new google.maps.InfoWindow({content:'<strong>TEDxKPI</strong><br>50.449382, 30.461258<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
-      		</mj-raw>
+Ваш квиток прикріплений до листа.
+	 	</mj-text>
+	 	</mj-column>
+	 	<mj-column width="35%"></mj-column>
+	 </mj-section>  
+	 	<mj-section background-color="#000" padding="0px" margin="0px">
+	 	<mj-image src="http://127.0.0.1:8000/static/pic/building.png" />
+	 	</mj-section>
+      	<mj-section background-color="black" padding="0px">      	
+      	<mj-html>
+      		<a href="https://www.google.com/maps/place/50.4483513,30.4600229/"><img src="https://maps.googleapis.com/maps/api/staticmap?center=50.4497518,30.4601188&amp;zoom=15&amp;scale=false&amp;size=600x300&amp;maptype=roadmap&amp;format=png&amp;visual_refresh=true&amp;markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7C50.4483513,30.4600229" alt="Google Map of TEDx KPI"></a>
+      	</mj-html>
       	</mj-section>
-
-
-      <!-- <mj-section background-color="#fbfbfb"></mj-section> -->
-
-      <!-- Social icons -->
-      <!-- <mj-section background-color="#f0f0f0"></mj-section> -->
-
     </mj-container>
   </mj-body>
 </mjml>
