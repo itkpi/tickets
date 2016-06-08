@@ -13,14 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+from campaigns.views.api_views import HelloWorld, LiqPayS2S
 from campaigns.views.buy_views import CartDetailView
 from campaigns.views.campaign_views import CampaignListView, CampaignDetailView
-from campaigns.views.tickets_views import TicketTypeListView
 from campaigns.views.issuedticket_views import TicketDetailView, TicketDetailEmailView, TicketDetailPDFView, CheckInView, TicketEmailSendView
-
-from campaigns.api_views import HelloWorld, LiqPayS2S
-
-from django.conf.urls import url
+from campaigns.views.tickets_views import TicketTypeListView
+from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.views.generic import RedirectView, TemplateView
@@ -41,5 +39,7 @@ urlpatterns = [
     url(r'^event/qr-scan/$', login_required(TemplateView.as_view(template_name='campaigns/qr_scan.html'), login_url='/admin/login/'), name='qr-scan'),
 
     url(r'^api/v1/hello/$', HelloWorld.as_view(), name='api-hello'),
-    url(r'^api/v1/liqpay/$', LiqPayS2S.as_view(), name='api-liqpay')
+    url(r'^api/v1/liqpay/$', LiqPayS2S.as_view(), name='api-liqpay'),
+
+    url(r'^report_builder/', include('report_builder.urls'))
 ]
