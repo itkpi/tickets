@@ -23,6 +23,14 @@ from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.views.generic import RedirectView, TemplateView
 
+from dashing.utils import router
+
+from campaigns.widgets import TicketsSoldWidget, TicketsTypesWidget, CoutersWidget
+
+router.register(TicketsSoldWidget, 'issuedtickets_widget')
+router.register(TicketsTypesWidget, 'tickettypes_widget')
+router.register(CoutersWidget, 'counters_widget')
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', RedirectView.as_view(pattern_name='campaign-list', permanent=False), name='root'),
@@ -41,5 +49,6 @@ urlpatterns = [
     url(r'^api/v1/hello/$', HelloWorld.as_view(), name='api-hello'),
     url(r'^api/v1/liqpay/$', LiqPayS2S.as_view(), name='api-liqpay'),
 
-    url(r'^report_builder/', include('report_builder.urls'))
+    url(r'^report_builder/', include('report_builder.urls')),
+    url(r'^dashboard/', include(router.urls)),
 ]

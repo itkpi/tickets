@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'restless',
     'qrcode',
     'report_builder',
+    'dashing',
 ]
 
 MIDDLEWARE_CLASSES = [
