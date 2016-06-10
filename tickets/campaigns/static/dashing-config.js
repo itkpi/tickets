@@ -10,6 +10,7 @@ var myDashboard = new Dashboard();
 //});
 
 myDashboard.addWidget('tickettypesWidget', 'List', {
+    row: 1,
     getData: function () {
         var self = this;
         Dashing.utils.get('tickettypes_widget', function(data) {
