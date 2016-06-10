@@ -28,3 +28,13 @@ myDashboard.addWidget('countersWidget', 'Knob', {
     },
     interval: 3000
 });
+
+myDashboard.addWidget('daysWidget', 'Graph', {
+    getData: function () {
+        var self = this;
+        Dashing.utils.get('days_widget', function(data) {
+            $.extend(self.scope, data);
+        });
+    },
+    interval: 10000
+});
