@@ -1,14 +1,14 @@
 import logging
 from uuid import uuid4
 
-from campaigns.models import TicketType, Campaign, Cart
+from campaigns.models import TicketType, Campaign, Cart, PromoCode
 from django import forms
 from django.db.models import Count, Q, F
 from django.http import Http404
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render_to_response
 from django.utils.timezone import now
 from django.utils.translation import ugettext as _
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.views.generic.edit import FormMixin
 
 logger = logging.getLogger(__name__)
@@ -81,11 +81,36 @@ class TicketTypeListView(ListView, FormMixin):
             data = form.cleaned_data.copy()
             del data['submit']
 
-            cart = Cart(uid="CART-{}".format(uuid4()),
-                        ticket_type=tickettype,
-                        **data)
-            cart.save()
+            cart = self.create_cart(data, tickettype)
             logger.info('Ticket {} added to cart {}'.format(tickettype, cart))
             return redirect(cart.get_absolute_url())
         else:
             return self.get(request, *args, **kwargs)
+
+    def create_cart(self, data, tickettype):
+        cart = Cart(uid="CART-{}".format(uuid4()),
+                    ticket_type=tickettype,
+                    **data)
+        cart.save()
+        return cart
+
+
+class PromoDetailView(TicketTypeListView):
+    def dispatch(self, request, *args, **kwargs):
+        self.promocode = PromoCode.objects.get(uid=self.kwargs['promo_uid'])
+        return super().dispatch(request, *args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        if self.promocode.cart is not None:
+            return redirect(self.promocode.cart.get_absolute_url())
+        return super().get(request, *args, **kwargs)
+
+    def get_queryset(self):
+        filter = TicketType.objects.filter(id=self.promocode.ticket_type.id)
+        return filter
+
+    def create_cart(self, data, tickettype):
+        cart = super().create_cart(data, tickettype)
+        self.promocode.cart = cart
+        self.promocode.save()
+        return cart

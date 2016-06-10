@@ -93,7 +93,6 @@ class Cart(models.Model):
     def __str__(self):
         return self.uid
 
-
     def get_absolute_url(self):
         from django.core.urlresolvers import reverse
         return reverse('cart-details', args=[self.uid])
@@ -118,3 +117,13 @@ class LiqPayData(models.Model):
     lp_status = models.CharField(max_length=50, null=True)
     lp_transaction_id = models.CharField(max_length=50, null=True)
     lp_type = models.CharField(max_length=50, null=True)
+
+
+class PromoCode(models.Model):
+    uid = models.CharField(max_length=200, unique=True)
+    ticket_type = models.ForeignKey(TicketType)
+    cart = models.ForeignKey(Cart, null=True)
+
+    def get_absolute_url(self):
+        from django.core.urlresolvers import reverse
+        return reverse('promo-details', args=[self.ticket_type.campaign.slug, self.uid])

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from campaigns.models import Campaign, Cart, TicketType, IssuedTicket, LiqPayData, TicketCounter
+from campaigns.models import Campaign, Cart, TicketType, IssuedTicket, LiqPayData, TicketCounter, PromoCode
 
 
 class CartInline(admin.StackedInline):
@@ -18,3 +18,4 @@ admin.site.register(Cart)
 admin.site.register(IssuedTicket, IssuedTicketAdmin)
 admin.site.register(LiqPayData)
 admin.site.register(TicketCounter)
+admin.site.register(PromoCode)

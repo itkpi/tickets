@@ -1,9 +1,10 @@
-from campaigns.models import Cart, LiqPayData
-from campaigns.utils.ticket_utils import issue_ticket
-from campaigns.views.campaign_views import logger
 from django.core.urlresolvers import reverse
 from django.views.generic import DetailView
 from liqpay.liqpay import LiqPay
+
+from campaigns.models import Cart, LiqPayData
+from campaigns.utils.ticket_utils import issue_ticket
+from campaigns.views.campaign_views import logger
 from tickets.settings import LIQPAY_PUBLIC, LIQPAY_PRIVATE
 
 

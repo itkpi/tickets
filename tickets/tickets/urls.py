@@ -17,7 +17,7 @@ from campaigns.views.api_views import HelloWorld, LiqPayS2S
 from campaigns.views.buy_views import CartDetailView
 from campaigns.views.campaign_views import CampaignListView, CampaignDetailView
 from campaigns.views.issuedticket_views import TicketDetailView, TicketDetailEmailView, TicketDetailPDFView, CheckInView, TicketEmailSendView
-from campaigns.views.tickets_views import TicketTypeListView
+from campaigns.views.tickets_views import TicketTypeListView, PromoDetailView
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
@@ -40,6 +40,7 @@ urlpatterns = [
     url(r'^campaigns/(?P<campaign_slug>[-\w]+)/tickets/$', TicketTypeListView.as_view(),
         name='tickettypes-for-campaign-list'),
     url(r'^cart/(?P<slug>[-\w]+)/$', CartDetailView.as_view(), name='cart-details'),
+    url(r'^campaigns/(?P<campaign_slug>[-\w]+)/promo/(?P<promo_uid>[-\w]+)/$', PromoDetailView.as_view(), name='promo-details'),
     url(r'^ticket/(?P<slug>[-\w]+)/$', TicketDetailView.as_view(), name='ticket-details'),
     url(r'^ticket/(?P<slug>[-\w]+)/pdf/$', TicketDetailPDFView.as_view(), name='ticket-details-pdf'),
     url(r'^ticket/(?P<slug>[-\w]+)/email/$', TicketDetailEmailView.as_view(), name='ticket-details-email'),
