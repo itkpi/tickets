@@ -97,7 +97,10 @@ class TicketTypeListView(ListView, FormMixin):
 
 class PromoDetailView(TicketTypeListView):
     def dispatch(self, request, *args, **kwargs):
-        self.promocode = PromoCode.objects.get(uid=self.kwargs['promo_uid'])
+        try:
+            self.promocode = PromoCode.objects.get(uid=self.kwargs['promo_uid'])
+        except PromoCode.DoesNotExist:
+            raise Http404()
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
