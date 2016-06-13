@@ -95,3 +95,11 @@ class DaysWidget(GraphWidget):
 
     def get_detail(self):
         return "{} квитків у продажу".format(self.get_amount())
+
+
+class Last10PeopleWidget(ListWidget):
+    title = 'Останні 10 покупців'
+
+    def get_data(self):
+        tickets = get_tickets_queryset().order_by('-timestamp')[:10]
+        return [{'label': '{} {}'.format(ticket.cart_set.first().name, ticket.cart_set.first().surname), 'value': ''} for ticket in tickets]

@@ -8,16 +8,14 @@ var myDashboard = new Dashboard();
 //    },
 //    interval: 10000
 //});
-
-myDashboard.addWidget('tickettypesWidget', 'List', {
-    row: 1,
+myDashboard.addWidget('peopleWidget', 'List', {
     getData: function () {
         var self = this;
-        Dashing.utils.get('tickettypes_widget', function(data) {
+        Dashing.utils.get('people_widget', function(data) {
             $.extend(self.scope, data);
         });
     },
-    interval: 10000
+    interval: 30000
 });
 
 myDashboard.addWidget('countersWidget', 'Knob', {
@@ -30,6 +28,17 @@ myDashboard.addWidget('countersWidget', 'Knob', {
     interval: 3000
 });
 
+myDashboard.addWidget('tickettypesWidget', 'List', {
+    row: 1,
+    getData: function () {
+        var self = this;
+        Dashing.utils.get('tickettypes_widget', function(data) {
+            $.extend(self.scope, data);
+        });
+    },
+    interval: 30000
+});
+
 myDashboard.addWidget('daysWidget', 'Graph', {
     getData: function () {
         var self = this;
@@ -37,5 +46,5 @@ myDashboard.addWidget('daysWidget', 'Graph', {
             $.extend(self.scope, data);
         });
     },
-    interval: 10000
+    interval: 30000
 });
