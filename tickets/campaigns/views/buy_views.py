@@ -1,10 +1,12 @@
 from django.core.urlresolvers import reverse
+from django.http import Http404
 from django.views.generic import DetailView
 from liqpay.liqpay import LiqPay
 
 from campaigns.models import Cart, LiqPayData
 from campaigns.utils.ticket_utils import issue_ticket
 from campaigns.views.campaign_views import logger
+from campaigns.views.tickets_views import present_tickettypes_queryset
 from tickets.settings import LIQPAY_PUBLIC, LIQPAY_PRIVATE
 
 
@@ -16,8 +18,14 @@ class CartDetailView(DetailView):
 
     def get(self, request, **kwargs):
         cart = self.get_object()
-        if cart.status == Cart.CART_CREATED and cart.ticket_type.cost == 0:
-            issue_ticket(cart)
+        if cart.status == Cart.CART_CREATED:
+            if cart.ticket_type.cost == 0:
+                issue_ticket(cart)
+            is_present = present_tickettypes_queryset(request, cart.ticket_type.campaign).filter(id=cart.ticket_type.id)\
+                .exists()
+            if not is_present:
+                raise Http404()
+
         return super().get(request, **kwargs)
 
     def get_context_data(self, **kwargs):

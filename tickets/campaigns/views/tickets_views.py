@@ -28,15 +28,19 @@ class BuyTicketForm(forms.Form):
     submit = forms.IntegerField()
 
 
-def available_tickettypes_queryset(request, campaign):
-    filter = TicketType.objects. \
+def present_tickettypes_queryset(request, campaign):
+    return TicketType.objects. \
         filter(campaign=campaign). \
         annotate(issued_amount=Count('counter__tickettype__issuedticket', distinct=True)). \
         filter(Q(counter__isnull=True) |
                (Q(counter__isnull=False) & (Q(counter__unlimited=True) |
                                             Q(counter__unlimited=False, counter__amount__gt=F('issued_amount'))))). \
         filter(Q(available_from__isnull=True) | Q(available_from__isnull=False, available_from__lt=now())). \
-        filter(Q(available_till__isnull=True) | Q(available_till__isnull=False, available_till__gt=now())). \
+        filter(Q(available_till__isnull=True) | Q(available_till__isnull=False, available_till__gt=now()))
+
+
+def available_tickettypes_queryset(request, campaign):
+    filter = present_tickettypes_queryset(request, campaign). \
         order_by('cost')
     if not request.user.is_superuser:
         filter = filter.filter(public=True)
