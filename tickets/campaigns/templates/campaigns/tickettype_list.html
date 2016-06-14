@@ -47,6 +47,11 @@
             <label for="working_place">Місце навчання/роботи:</label> {%if form.working_place.errors%}
     {% for error in form.working_place.errors %}<span class="label label-danger">{{error|escape}}</span>{%endfor%}{%endif%}
             <input type="text" class="form-control" placeholder="КПІ, ФІОТ" id="working_place" name="working_place" value="{%if form.working_place.value%}{{form.working_place.value}}{%endif%}">
+
+
+            <label for="personal_data">Подтверждаю свое согласие на обработку персональных данных</label>
+            <input type="checkbox" id="personal_data" checked="checked" disabled>
+        </div>
         </div>
         {% for tickettype in object_list %}
                     <div class="col col-xs-12 ticket">
