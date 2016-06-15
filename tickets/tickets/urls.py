@@ -26,13 +26,17 @@ from django.views.generic import RedirectView, TemplateView
 
 from dashing.utils import router
 
-from campaigns.widgets import TicketsSoldWidget, TicketsTypesWidget, CoutersWidget, DaysWidget, Last10PeopleWidget
+from campaigns.widgets import TicketsSoldWidget, TicketsTypesWidget, CoutersWidget, DaysWidget, Last10PeopleWidget, \
+    TodayWidget, AllTicketsWidget
 
 router.register(TicketsSoldWidget, 'issuedtickets_widget')
 router.register(TicketsTypesWidget, 'tickettypes_widget')
 router.register(CoutersWidget, 'counters_widget')
+router.register(TodayWidget, 'today_widget')
 router.register(DaysWidget, 'days_widget')
 router.register(Last10PeopleWidget, 'people_widget')
+router.register(AllTicketsWidget, 'alltickets_widget')
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
