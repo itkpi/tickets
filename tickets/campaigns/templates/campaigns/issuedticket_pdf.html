@@ -8,18 +8,19 @@
     .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:3px;overflow:hidden;word-break:normal;}
     .tg .tg-yw4l{vertical-align:top}
     .title {font-size: 30px; font-weight: bold}
-    .uid {font-size: 25px; font-weight: bold}
+    .uid {font-size: 18px; font-weight: bold}
     </style>
 
     <table class="tg">
       <tr>
-        <th class="tg-yw4l" colspan="3"><span class='title'>TEDx KPI</span></th>
+        <th class="tg-yw4l" colspan="3"><span class='title'>TEDxKPI</span></th>
       </tr>
       <tr>
         {% with "//"|add:site.domain|add:issuedticket.get_absolute_url as qr_url %}
         <td class="tg-yw4l" rowspan="4">{% qr_from_text qr_url %}<br></td>
         {% endwith %}
         <td colspan="2"><span class="uid">{{issuedticket.uid}}</span></td>
+        <!--<td colspan="2"><span class="uid">T-mmmmmmmm-mmmm-mmmm-mmmm-mmmmmmmmmmmm</span></td>-->
       </tr>
       <tr>
         <td class="tg-yw4l" width="50%">{{issuedticket.get_cart.name}} {{issuedticket.get_cart.surname}}<br></td>

@@ -16,7 +16,8 @@ Including another URLconf
 from campaigns.views.api_views import HelloWorld, LiqPayS2S
 from campaigns.views.buy_views import CartDetailView
 from campaigns.views.campaign_views import CampaignListView, CampaignDetailView
-from campaigns.views.issuedticket_views import TicketDetailView, TicketDetailEmailView, TicketDetailPDFView, CheckInView, TicketEmailSendView
+from campaigns.views.issuedticket_views import TicketDetailView, TicketDetailEmailView, TicketDetailPDFView, CheckInView, TicketEmailSendView, \
+    TicketDetailPDFHTMLView
 from campaigns.views.tickets_views import TicketTypeListView, PromoDetailView
 from django.conf.urls import url, include
 from django.contrib import admin
@@ -44,6 +45,7 @@ urlpatterns = [
     url(r'^campaigns/(?P<campaign_slug>[-\w]+)/promo/(?P<promo_uid>[-\w]+)/$', PromoDetailView.as_view(), name='promo-details'),
     url(r'^ticket/(?P<slug>[-\w]+)/$', TicketDetailView.as_view(), name='ticket-details'),
     url(r'^ticket/(?P<slug>[-\w]+)/pdf/$', TicketDetailPDFView.as_view(), name='ticket-details-pdf'),
+    url(r'^ticket/(?P<slug>[-\w]+)/pdf/html/$', TicketDetailPDFHTMLView.as_view(), name='ticket-details-pdf-html'),
     url(r'^ticket/(?P<slug>[-\w]+)/email/$', TicketDetailEmailView.as_view(), name='ticket-details-email'),
     url(r'^ticket/(?P<slug>[-\w]+)/send-email/$', TicketEmailSendView.as_view(), name='ticket-send-notification'),
     url(r'^event/check-in/$', CheckInView.as_view(), name='check-in'),
