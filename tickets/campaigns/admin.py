@@ -18,6 +18,7 @@ class IssuedTicketAdmin(admin.ModelAdmin):
 class LiqPayDataInline(admin.StackedInline):
     model = LiqPayData
     extra = 0
+    readonly_fields = ('timestamp',)
 
 
 class CartAdmin(admin.ModelAdmin):
