@@ -27,10 +27,15 @@ class CartAdmin(admin.ModelAdmin):
     readonly_fields = ('timestamp',)
 
 
+class LiqPayDataAdmin(admin.ModelAdmin):
+    model = LiqPayData
+    readonly_fields = ('timestamp',)
+
+
 admin.site.register(Campaign)
 admin.site.register(TicketType)
 admin.site.register(Cart, CartAdmin)
 admin.site.register(IssuedTicket, IssuedTicketAdmin)
-admin.site.register(LiqPayData)
+admin.site.register(LiqPayData, LiqPayDataAdmin)
 admin.site.register(TicketCounter)
 admin.site.register(PromoCode)
