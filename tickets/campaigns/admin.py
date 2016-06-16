@@ -12,6 +12,7 @@ class IssuedTicketAdmin(admin.ModelAdmin):
     inlines = (CartInline, )
     search_fields = ('cart__name', 'cart__surname', 'uid')
     list_filter = ('cart__ticket_type', )
+    readonly_fields = ('timestamp',)
 
 
 class LiqPayDataInline(admin.StackedInline):
@@ -23,6 +24,7 @@ class CartAdmin(admin.ModelAdmin):
     model = Cart
     list_filter = ('status', 'ticket_type', )
     inlines = (LiqPayDataInline,)
+    readonly_fields = ('timestamp',)
 
 
 admin.site.register(Campaign)
