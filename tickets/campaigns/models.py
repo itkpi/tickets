@@ -127,3 +127,6 @@ class PromoCode(models.Model):
     def get_absolute_url(self):
         from django.core.urlresolvers import reverse
         return reverse('promo-details', args=[self.ticket_type.campaign.slug, self.uid])
+
+    def __str__(self):
+        return "{} [{}]".format(self.uid, "used" if self.cart else "free")
