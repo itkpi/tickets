@@ -9,12 +9,25 @@ class CartInline(admin.StackedInline):
 
 class IssuedTicketAdmin(admin.ModelAdmin):
     model = IssuedTicket
-    inlines = [CartInline, ]
+    inlines = (CartInline, )
+    search_fields = ('cart__name', 'cart__surname', 'uid')
+    list_filter = ('cart__ticket_type', )
+
+
+class LiqPayDataInline(admin.StackedInline):
+    model = LiqPayData
+    extra = 0
+
+
+class CartAdmin(admin.ModelAdmin):
+    model = Cart
+    list_filter = ('status', 'ticket_type', )
+    inlines = (LiqPayDataInline,)
 
 
 admin.site.register(Campaign)
 admin.site.register(TicketType)
-admin.site.register(Cart)
+admin.site.register(Cart, CartAdmin)
 admin.site.register(IssuedTicket, IssuedTicketAdmin)
 admin.site.register(LiqPayData)
 admin.site.register(TicketCounter)
