@@ -1,4 +1,5 @@
 import logging
+import smtplib
 
 from campaigns.utils.pdf_utils import generate_pdf
 from django.contrib.sites.models import Site
@@ -30,4 +31,7 @@ def notify_owner(ticket):
     msg.content_subtype = "html"
     if pdf:
         msg.attach('tedx-ticket.pdf', pdf, 'application/pdf')
-    msg.send()
+    try:
+        msg.send()
+    except smtplib.SMTPException as e:
+        logger.error("Error sending the notification", exc_info=e)
