@@ -102,7 +102,7 @@ class DaysWidget(GraphWidget):
             filter(timestamp__gt=today,
                    timestamp__lt=today + datetime.timedelta(1)). \
             filter(cart__ticket_type__cost=0)
-        return "з них {} промо".format(today_tickets.count())
+        return "з них {} безкоштовні".format(today_tickets.count())
 
 
 class Last10PeopleWidget(ListWidget):
