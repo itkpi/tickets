@@ -36,7 +36,7 @@ class LiqPayDataAdmin(admin.ModelAdmin):
 class PromoCodeAdmin(admin.ModelAdmin):
     model = PromoCode
     search_fields = ('cart__name', 'cart__surname', 'uid', 'cart__uid', 'cart__ticket__uid')
-    list_filter = ('cart__ticket_type', )
+    list_filter = ('ticket_type', )
 
 
 admin.site.register(Campaign)
