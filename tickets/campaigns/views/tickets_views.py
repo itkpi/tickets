@@ -118,8 +118,8 @@ class PromoDetailView(TicketTypeListView):
 
     def create_cart(self, data, tickettype):
         cart = super().create_cart(data, tickettype)
-        # if self.promocode.cart is not None:
-            # raise Http404()
+        if self.promocode.cart is not None:
+            raise Http404()
         self.promocode.cart = cart
         self.promocode.save()
         return cart
