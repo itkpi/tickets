@@ -43,7 +43,7 @@ myDashboard.addWidget('todayWidget', 'List', {
 
 
 
-myDashboard.addWidget('countersWidget', 'Knob', {
+myDashboard.addWidget('countersWidget', 'Number', {
     getData: function () {
         var self = this;
         Dashing.utils.get('counters_widget', function(data) {
