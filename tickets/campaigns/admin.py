@@ -1,5 +1,33 @@
 from django.contrib import admin
 from campaigns.models import Campaign, Cart, TicketType, IssuedTicket, LiqPayData, TicketCounter, PromoCode
+from django.contrib.admin.filters import SimpleListFilter
+
+
+class NullFilterSpec(SimpleListFilter):
+    title = u''
+
+    parameter_name = u''
+
+    def lookups(self, request, model_admin):
+        return (
+            ('1', 'Has value' ),
+            ('0', 'None' ),
+        )
+
+    def queryset(self, request, queryset):
+        kwargs = {
+        '%s'%self.parameter_name : None,
+        }
+        if self.value() == '0':
+            return queryset.filter(**kwargs)
+        if self.value() == '1':
+            return queryset.exclude(**kwargs)
+        return queryset
+
+
+class CartNullFilterSpec(NullFilterSpec):
+    title = u'Cart'
+    parameter_name = u'cart'
 
 
 class CartInline(admin.StackedInline):
@@ -36,7 +64,7 @@ class LiqPayDataAdmin(admin.ModelAdmin):
 class PromoCodeAdmin(admin.ModelAdmin):
     model = PromoCode
     search_fields = ('cart__name', 'cart__surname', 'uid', 'cart__uid', 'cart__ticket__uid')
-    list_filter = ('ticket_type', )
+    list_filter = ('ticket_type', CartNullFilterSpec)
 
 
 admin.site.register(Campaign)
