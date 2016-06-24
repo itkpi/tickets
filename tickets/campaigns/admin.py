@@ -33,10 +33,16 @@ class LiqPayDataAdmin(admin.ModelAdmin):
     readonly_fields = ('timestamp',)
 
 
+class PromoCodeAdmin(admin.ModelAdmin):
+    model = PromoCode
+    search_fields = ('cart__name', 'cart__surname', 'uid', 'cart__uid', 'cart__ticket__uid')
+    list_filter = ('cart__ticket_type', )
+
+
 admin.site.register(Campaign)
 admin.site.register(TicketType)
 admin.site.register(Cart, CartAdmin)
 admin.site.register(IssuedTicket, IssuedTicketAdmin)
 admin.site.register(LiqPayData, LiqPayDataAdmin)
 admin.site.register(TicketCounter)
-admin.site.register(PromoCode)
+admin.site.register(PromoCode, PromoCodeAdmin)
