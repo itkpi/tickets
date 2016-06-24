@@ -9,6 +9,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, TemplateView
 from django.views.generic.detail import SingleObjectTemplateResponseMixin, BaseDetailView
 from django.views.generic.edit import BaseFormView
+from django.shortcuts import redirect
 from tickets.settings import GOOGLE_MAPS_KEY
 
 
@@ -22,6 +23,13 @@ class TicketDetailView(DetailView):
         d = super().get_context_data(**kwargs)
         d.update({'GOOGLE_MAPS_KEY': GOOGLE_MAPS_KEY})
         return d
+
+    def get(self, request, **kwargs):
+        r = super().get(request, **kwargs)
+        if self.object.alias_for:
+            ticket = IssuedTicket.objects.get(uid=self.object.alias_for)
+            return redirect(ticket.get_absolute_url())
+        return r
 
 
 class TicketDetailEmailView(TicketDetailView):
@@ -42,6 +50,13 @@ class TicketDetailPDFHTMLView(SingleObjectTemplateResponseMixin, BaseDetailView,
         d = super().get_context_data(**kwargs)
         d.update({'pdf': True, 'GOOGLE_MAPS_KEY': GOOGLE_MAPS_KEY})
         return d
+
+    def get(self, request, **kwargs):
+        r = super().get(request, **kwargs)
+        if self.object.alias_for:
+            ticket = IssuedTicket.objects.get(uid=self.object.alias_for)
+            return redirect(ticket.get_absolute_url())
+        return r
 
 
 class TicketDetailPDFView(TicketDetailPDFHTMLView, PDFTemplateView):

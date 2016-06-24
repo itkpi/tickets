@@ -13,7 +13,8 @@ def remove_brackets(name):
 
 def get_tickets_queryset():
     return IssuedTicket.objects. \
-        exclude(cart__ticket_type__type='Test Ticket')
+        exclude(cart__ticket_type__type='Test Ticket'). \
+        filter(alias_for__exact='')
 
 
 class TicketsSoldWidget(NumberWidget):

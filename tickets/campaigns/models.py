@@ -49,6 +49,7 @@ class IssuedTicket(models.Model):
     timestamp = models.DateTimeField(auto_now=True)
     ticket_type = models.ForeignKey(TicketType)
     checked_in = models.BooleanField(default=False)
+    alias_for = models.CharField(max_length=200, null=False, blank=True, default='')
 
     def __str__(self):
         return self.uid
