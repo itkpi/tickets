@@ -39,7 +39,7 @@ class IssuedTicketAdmin(admin.ModelAdmin):
     model = IssuedTicket
     inlines = (CartInline, )
     search_fields = ('cart__name', 'cart__surname', 'uid')
-    list_filter = ('cart__ticket_type', )
+    list_filter = ('cart__ticket_type', 'checked_in')
     readonly_fields = ('timestamp',)
 
 
