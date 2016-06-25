@@ -92,6 +92,8 @@ class TicketTypeListView(ListView, FormMixin):
             return self.get(request, *args, **kwargs)
 
     def create_cart(self, data, tickettype):
+        if not tickettype.campaign.opened:
+            raise Http404()
         cart = Cart(uid="CART-{}".format(uuid4()),
                     ticket_type=tickettype,
                     **data)
